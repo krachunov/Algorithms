@@ -1,5 +1,6 @@
 package homeWrok1;
 
+import java.util.Scanner;
 import java.util.Stack;
 
 public class TowerOfHanoi {
@@ -8,7 +9,9 @@ public class TowerOfHanoi {
 	static Stack<Integer> spare = new Stack<Integer>();
 	static Stack<Integer> destination = new Stack<Integer>();
 
-	static void printRods() {
+	static void printRods(int bottomDisk) {
+		System.out.printf("In step #%d, move disk %d form  \n", numberOfSteps,
+				bottomDisk);
 		System.out.println("Sorce: " + sorce.toString());
 		System.out.println("spare: " + spare.toString());
 		System.out.println("Destination: " + destination.toString());
@@ -19,24 +22,29 @@ public class TowerOfHanoi {
 		if (bottomDisk > 0) {
 			hanoi(bottomDisk - 1, sorce, destination, spare);
 			destination.push(sorce.pop());
-			System.out.printf("In step %d, move disk %d form  \n",
-					numberOfSteps, bottomDisk);
-			printRods();
+		
 			numberOfSteps++;
+			printRods(bottomDisk);
 			hanoi(bottomDisk - 1, spare, sorce, destination);
+			
 		}
 	}
 
-	public static void main(String[] args) {
-		sorce.push(6);
-		sorce.push(5);
-		sorce.push(4);
-		sorce.push(3);
-		sorce.push(2);
-		sorce.push(1);
-		int n = sorce.size();
+	static void crateDisks(int n) {
+		for (int i = n; i > 0; i--) {
+			sorce.push(i);
+		}
 
-		hanoi(n, sorce, spare, destination);
+	}
+
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Enter the number of disks");
+		int numberOfDisk = sc.nextInt();
+		crateDisks(numberOfDisk);
+
+	
+		hanoi(numberOfDisk, sorce, spare, destination);
 		System.out.println(numberOfSteps);
 
 	}

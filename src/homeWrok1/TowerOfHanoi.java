@@ -1,3 +1,14 @@
+/**
+ * Your task is to solve the famous Tower of Hanoi puzzle using recursion. 
+In this problem, you have three rods (let’s call them source, destination and spare). Initially, there are n disks, all placed on the source rod like in the picture below:
+ 
+Your objective is to move all disks from the source rod to the destination rod. There are several rules:
+1)	Only one disk can be moved at a time
+2)	Only the topmost disk on a rod can be moved
+3)	A disk can only be placed on top of a larger disk or on an empty rod
+
+ */
+
 package homeWrok1;
 
 import java.util.Scanner;
@@ -22,11 +33,11 @@ public class TowerOfHanoi {
 		if (bottomDisk > 0) {
 			hanoi(bottomDisk - 1, sorce, destination, spare);
 			destination.push(sorce.pop());
-		
+
 			numberOfSteps++;
 			printRods(bottomDisk);
 			hanoi(bottomDisk - 1, spare, sorce, destination);
-			
+
 		}
 	}
 
@@ -43,7 +54,6 @@ public class TowerOfHanoi {
 		int numberOfDisk = sc.nextInt();
 		crateDisks(numberOfDisk);
 
-	
 		hanoi(numberOfDisk, sorce, spare, destination);
 		System.out.println(numberOfSteps);
 

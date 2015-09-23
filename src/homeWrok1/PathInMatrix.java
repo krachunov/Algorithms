@@ -1,3 +1,11 @@
+/**
+ * Problem 5.	Paths between Cells in Matrix
+We are given a matrix of passable and non-passable cells. Write a recursive program for finding all paths between two cells in the matrix. The matrix can be represented by a two-dimensional char array or a string array, passable cells are represented by a space (' '), non-passable cells are represented by asterisks ('*'), the start cell is represented by the symbol 's' and the exit cell is represented by 'e'. Movement is allowed in all four directions (up, down, left, right) and a cell can be passed only once in a given path.
+Print on the console all paths and on the last line the count of paths found. You can represent the directions with symbols, e.g. 'D' for down, 'U' for up, etc. The ordering of the paths is not relevant.
+Examples:
+Let’s consider the following layout:
+
+ */
 package homeWrok1;
 
 import java.util.ArrayList;
@@ -7,7 +15,7 @@ public class PathInMatrix {
 	static List<Character> dir = new ArrayList<Character>();
 
 	static void printDir() {
-		
+
 		for (Character character : dir) {
 			System.out.print(character);
 		}

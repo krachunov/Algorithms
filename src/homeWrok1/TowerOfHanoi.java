@@ -21,7 +21,7 @@ public class TowerOfHanoi {
 	static Stack<Integer> destination = new Stack<Integer>();
 
 	static void printRods(int bottomDisk) {
-		System.out.printf("In step #%d, move disk %d form  \n", numberOfSteps,
+		System.out.printf("In step #%d, move disk %d   \n", numberOfSteps,
 				bottomDisk);
 		System.out.println("Sorce: " + sorce.toString());
 		System.out.println("spare: " + spare.toString());

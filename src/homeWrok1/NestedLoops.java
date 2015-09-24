@@ -3,7 +3,7 @@ package homeWrok1;
 public class NestedLoops {
 
 	static int[] loops;
-	static int n = 3;
+	static int n = 10;
 
 	public static void nestedLoops(int currentLoop) {
 		if (currentLoop == n) {

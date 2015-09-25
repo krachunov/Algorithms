@@ -5,7 +5,9 @@ Let’s define a connected area in a matrix as an area of cells in which there is 
  */
 package homeWrok1;
 
-public class Area implements Comparable<Area> {
+import java.util.Comparator;
+
+public class Area implements Comparator<Area> {
 	private int positionX;
 	private int positionY;
 	private int size;
@@ -41,20 +43,26 @@ public class Area implements Comparable<Area> {
 	}
 
 	@Override
-	public int compareTo(Area o) {
-		if (this.getSize() > o.getSize()) {
-			return 1;
-		} else if (this.getSize() < o.getSize()) {
-			return -1;
-		} else {
-			return 0;
-		}
-	}
-
-	@Override
 	public String toString() {
 		return "Position X/Y: " + getPositionX() + "/" + getPositionY()
 				+ " size: " + getSize();
 
+	}
+
+	@Override
+	public int compare(Area o1, Area o2) {
+		if (o1.getSize() > o2.getSize()) {
+			return 1;
+		} else if (o1.getSize() < o2.getSize()) {
+			return -1;
+		} else {
+			if (o1.getPositionX() > o2.getPositionX()) {
+				return 1;
+			} else if (o1.getPositionY() < o2.getPositionY()) {
+				return -1;
+			} else {
+				return 0;
+			}
+		}
 	}
 }

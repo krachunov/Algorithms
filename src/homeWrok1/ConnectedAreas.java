@@ -16,14 +16,21 @@ public class ConnectedAreas {
 			{ ' ', ' ', ' ', '*', ' ', ' ', ' ', '*', ' ' },
 			{ ' ', ' ', ' ', ' ', '*', ' ', '*', ' ', ' ' } };
 
-	public static void discoveryLab() {
-		for (int x = 0; x < matrix.length; x++) {
-			for (int y = 0; y < matrix[0].length; y++) {
-				if (x >= matrix.length || y >= matrix[x].length) {
+	static char[][] matrix2 = {
+			{ '*', ' ', ' ', '*', ' ', ' ', ' ', '*', ' ' , ' '},
+			{ '*', ' ', ' ', '*', ' ', ' ', ' ', '*', ' ', ' ' },
+			{ '*', ' ', ' ', '*', '*', '*', '*', '*', ' ' , ' '},
+			{ '*', ' ', ' ', '*', ' ', ' ', ' ', '*', ' ' , ' '},
+			{ '*', ' ', ' ', '*', ' ', ' ', ' ', '*', ' ' , ' '}};
+
+	public static void discoveryLab(char[][] matrixLab) {
+		for (int x = 0; x < matrixLab.length; x++) {
+			for (int y = 0; y < matrixLab[0].length; y++) {
+				if (x >= matrixLab.length || y >= matrixLab[x].length) {
 					continue;
 				}
-				if (matrix[x][y] == ' ') {
-					findArea(x, y);
+				if (matrixLab[x][y] == ' ') {
+					findArea(matrixLab, x, y);
 					listAreas.add(new Area(x, y, count));
 					count = 0;
 				}
@@ -31,32 +38,32 @@ public class ConnectedAreas {
 		}
 	}
 
-	public static void findArea(int x, int y) {
+	private static void findArea(char[][] matrixLab, int x, int y) {
 
 		int row = x;
 		int col = y;
 
-		if (row < 0 || col < 0 || row >= matrix.length
-				|| col >= matrix[row].length) {
+		if (row < 0 || col < 0 || row >= matrixLab.length
+				|| col >= matrixLab[row].length) {
 			return;
 		}
 
-		if (matrix[row][col] != ' ') {
+		if (matrixLab[row][col] != ' ') {
 			return;
 		}
 
-		matrix[row][col] = 'x';
+		matrixLab[row][col] = 'x';
 		count++;
 
-		findArea(x, y + 1);
-		findArea(x + 1, y);
-		findArea(x, y - 1);
-		findArea(x - 1, y);
+		findArea(matrixLab, x, y + 1);
+		findArea(matrixLab, x + 1, y);
+		findArea(matrixLab, x, y - 1);
+		findArea(matrixLab, x - 1, y);
 
 	}
 
 	public static void main(String[] args) {
-		discoveryLab();
+		discoveryLab(matrix);
 
 		for (Area element : listAreas) {
 			System.out.println(element.toString());

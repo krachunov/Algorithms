@@ -63,6 +63,8 @@ public class ConnectedAreas {
 	}
 
 	public static void main(String[] args) {
+		
+		//If you want to test with another lab, change argument in method discoveryLab(), with "matrix2"
 		discoveryLab(matrix);
 
 		for (Area element : listAreas) {

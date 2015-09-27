@@ -23,7 +23,7 @@ public class GenerateCombinationsIteratively {
 			tmp++;
 			arr[index] = tmp;
 			if (arr[index] == n) {
-				arr[index] = 0;
+				arr[index] = 1;
 				index--;
 			} else {
 				break;
@@ -42,14 +42,18 @@ public class GenerateCombinationsIteratively {
 		System.out.println();
 	}
 
-	public static void main(String[] args) {
-		int n = 3;
-		arr = new int[n];
+	public static void gen(int n) {
 		boolean stropLoop = true;
+
 		while (stropLoop) {
 			stropLoop = itera(n);
 			print();
-
 		}
+	}
+
+	public static void main(String[] args) {
+		int n = 3;
+		arr = new int[n];
+		gen(n);
 	}
 }

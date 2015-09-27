@@ -16,7 +16,7 @@ public class GenerateCombinationsIteratively {
 	static int c = 0;
 	static int[] loops;
 	static int numberOfLoops = 2;
-	static int totalPermutatin = 0;
+	static int totalCombinations = 0;
 
 	/**
 	 * 
@@ -32,7 +32,7 @@ public class GenerateCombinationsIteratively {
 	public static void nestedLoops(int index, int start, int n, int k) {
 		if (index == loops.length) {
 			printLoops();
-			totalPermutatin++;
+			totalCombinations++;
 			return;
 		}
 		for (int i = start; i <= n; i++) {
@@ -56,6 +56,6 @@ public class GenerateCombinationsIteratively {
 		int k = sc.nextInt();
 		loops = new int[k];
 		nestedLoops(0, 1, n, k);
-		System.out.println("Totatl permutaions: " + totalPermutatin);
+		System.out.println("Totatl tombinations: " + totalCombinations);
 	}
 }

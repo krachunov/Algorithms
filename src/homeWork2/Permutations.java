@@ -17,7 +17,7 @@ public class Permutations {
 
 	public static void permute(int i, int n) {
 		if (i > n) {
-//			printLoops(n);
+			printLoops(n);
 			totalPermutatin++;
 
 		} else {

@@ -13,49 +13,43 @@ package homeWork2;
 import java.util.Scanner;
 
 public class GenerateCombinationsIteratively {
-	static int c = 0;
-	static int[] loops;
-	static int numberOfLoops = 2;
-	static int totalCombinations = 0;
 
-	/**
-	 * 
-	 * @param index
-	 *            - index of array
-	 * @param start
-	 *            - start count
-	 * @param n
-	 *            - number of iteration
-	 * @param k
-	 *            - number of nested loop
-	 */
-	public static void nestedLoops(int index, int start, int n, int k) {
-		if (index == loops.length) {
-			printLoops();
-			totalCombinations++;
-			return;
+	static int[] arr;
+
+	public static boolean itera(int n) {
+		int index = arr.length - 1;
+		while (index >= 0) {
+			int tmp = arr[index];
+			tmp++;
+			arr[index] = tmp;
+			if (arr[index] == n) {
+				arr[index] = 0;
+				index--;
+			} else {
+				break;
+			}
 		}
-		for (int i = start; i <= n; i++) {
-			loops[index] = i;
-			nestedLoops(index + 1, i + 1, n, k - 1);
+		if (index >= 0) {
+			return true;
 		}
+		return false;
 	}
 
-	public static void printLoops() {
-		for (int i = 0; i < loops.length; i++) {
-			System.out.printf("%d ", loops[i]);
+	public static void print() {
+		for (int i : arr) {
+			System.out.print(i + " ");
 		}
 		System.out.println();
 	}
 
 	public static void main(String[] args) {
-		Scanner sc = new Scanner(System.in);
-		System.out.println("Enter the number n");
-		int n = sc.nextInt();
-		System.out.println("Enter the number k");
-		int k = sc.nextInt();
-		loops = new int[k];
-		nestedLoops(0, 1, n, k);
-		System.out.println("Totatl tombinations: " + totalCombinations);
+		int n = 3;
+		arr = new int[n];
+		boolean stropLoop = true;
+		while (stropLoop) {
+			stropLoop = itera(n);
+			print();
+
+		}
 	}
 }

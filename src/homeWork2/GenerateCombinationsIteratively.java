@@ -18,10 +18,10 @@ public class GenerateCombinationsIteratively {
 
 	public static boolean itera(int n) {
 		int index = arr.length - 1;
+		
 		while (index >= 0) {
 			int tmp = arr[index];
-			tmp++;
-			arr[index] = tmp;
+			arr[index] = ++tmp;
 			if (arr[index] == n) {
 				arr[index] = 1;
 				index--;

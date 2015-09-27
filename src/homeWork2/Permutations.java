@@ -9,7 +9,6 @@ number of permutations is found by calculating n!
 package homeWork2;
 
 public class Permutations {
-	static int c = 0;
 	static int[] loops;
 	static boolean[] used;
 	static int totalPermutatin = 0;

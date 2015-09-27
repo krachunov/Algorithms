@@ -41,7 +41,7 @@ public class CombinationsWithOutRepetition {
 
 	public static void main(String[] args) {
 
-		int n = 5;
+		int n = 4;
 		int k = 3;
 		loops = new int[k];
 		nestedLoops(0, 1, n, k);

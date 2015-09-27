@@ -8,6 +8,8 @@ number of permutations is found by calculating n!
  */
 package homeWork2;
 
+import java.util.Scanner;
+
 public class Permutations {
 	static int[] loops;
 	static boolean[] used;
@@ -45,11 +47,14 @@ public class Permutations {
 	}
 
 	public static void main(String[] args) {
-		int n = 3;
+		System.out.println("Enter the num of n");
+		Scanner sc = new Scanner(System.in);
+		int n = sc.nextInt();
+		sc.close();
 		loops = new int[n];
 		used = new boolean[n];
 		permute(n);
-		System.out.println("Totatl permutaions" + totalPermutatin);
+		System.out.println("Totatl permutaions: " + totalPermutatin);
 	}
 
 }

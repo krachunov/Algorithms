@@ -1,23 +1,27 @@
 /**
- * Problem 1.	Permutations
- *Write a recursive program for 
- *generating and printing all permutations 
- *(without repetition) of the numbers 1, 2, ..., n
- * for a given integer number n (n > 0). The 
- * number of permutations is found by calculating n!
+ *Problem 2.
+ *Generate Permutations Iteratively
+ *The above problem presented a recursive 
+ *solution for generating all permutations
+ *(without repeating elements) of a collection.
+ *Your task is to write a non-recursive algorithm to achieve the same goal.
+ *There shouldn’t be any recursive calls in your program (only loops). 
+ *You may use the examples for problem 1 
+ *to check whether your solution is correct.
+ *
  */
 package homeWork2;
 
 import java.util.Scanner;
 
-public class Permutations {
+public class PermutationsWithoutRecursion {
 	static int[] loops;
 	static boolean[] used;
 	static int totalPermutatin = 0;
 
 	public static void permute(int i, int n) {
 		if (i > n) {
-//			printLoops(n);
+			printLoops(n);
 			totalPermutatin++;
 
 		} else {

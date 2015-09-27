@@ -5,10 +5,13 @@ Modify the previous program to skip duplicates, e.g. (1 1) is not valid.
  */
 package homeWrok1;
 
+import java.util.Scanner;
+
 public class CombinationsWithOutRepetition {
 	static int c = 0;
 	static int[] loops;
 	static int numberOfLoops = 2;
+	static int totalPermutatin = 0;
 
 	/**
 	 * 
@@ -24,11 +27,12 @@ public class CombinationsWithOutRepetition {
 	public static void nestedLoops(int index, int start, int n, int k) {
 		if (index == loops.length) {
 			printLoops();
+			totalPermutatin++;
 			return;
 		}
 		for (int i = start; i <= n; i++) {
 			loops[index] = i;
-			nestedLoops(index + 1, i+1, n, k - 1);
+			nestedLoops(index + 1, i + 1, n, k - 1);
 		}
 	}
 
@@ -40,10 +44,13 @@ public class CombinationsWithOutRepetition {
 	}
 
 	public static void main(String[] args) {
-
-		int n = 4;
-		int k = 3;
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Enter the number n");
+		int n = sc.nextInt();
+		System.out.println("Enter the number k");
+		int k = sc.nextInt();
 		loops = new int[k];
 		nestedLoops(0, 1, n, k);
+		System.out.println("Totatl permutaions: " + totalPermutatin);
 	}
 }

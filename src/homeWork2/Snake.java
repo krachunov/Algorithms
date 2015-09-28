@@ -74,7 +74,6 @@ public class Snake {
 				{ ' ', ' ', ' ', ' ', ' ', ' ' },
 				{ ' ', ' ', ' ', ' ', ' ', ' ' } };
 
-	
 		findPath(matrix, 0, 0, 'S', dir);
 		// System.out.println(snakeCount);
 	}

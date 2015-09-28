@@ -73,6 +73,6 @@ public class Snake {
 				{ ' ', ' ', ' ', ' ', ' ', ' ' },
 				{ ' ', ' ', ' ', ' ', ' ', ' ' },
 				{ ' ', ' ', ' ', ' ', ' ', ' ' } };
-		findPath(matrix, 0, 0, 's', dir);
+		findPath(matrix, 0, 0, 'S', dir);
 	}
 }

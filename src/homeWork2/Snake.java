@@ -13,9 +13,10 @@ package homeWork2;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.Stack;
 
 public class Snake {
-	// static List<Character> dir = new ArrayList<Character>();
+	static Stack<Character> dir = new Stack<Character>();
 	static int snakeLength;
 
 	static void printDir(List<Character> dir) {
@@ -30,18 +31,20 @@ public class Snake {
 		int count = 0;
 		int row = x;
 		int col = y;
-
+		// check if out of array
 		if (row < 0 || col < 0 || row >= matrix.length
 				|| col >= matrix[row].length) {
 			return;
 		}
-
+		// check is free
 		if (matrix[row][col] != ' ') {
 			return;
 		}
+
 		if (snakeLength > 0) {
-			// System.out.print(symbol);
+
 			matrix[row][col] = 'x';
+
 			dir.add(symbol);
 			snakeLength--;
 			findPath(matrix, x, y + 1, 'R', dir);
@@ -54,7 +57,6 @@ public class Snake {
 			snakeLength++;
 		} else {
 			printDir(dir);
-			
 			return;
 		}
 
@@ -64,7 +66,7 @@ public class Snake {
 		System.out.println("Enter the snake length");
 		Scanner sc = new Scanner(System.in);
 		snakeLength = sc.nextInt();
-		List<Character> dir = new ArrayList<Character>();
+
 		char[][] matrix = { { ' ', ' ', ' ', ' ', ' ', ' ' },
 				{ ' ', ' ', ' ', ' ', ' ', ' ' },
 				{ ' ', ' ', ' ', ' ', ' ', ' ' },

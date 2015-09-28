@@ -1,3 +1,11 @@
+/**
+ * Problem 5.	
+ * Permutations with Repetition
+ *Write a program to generate all permutations with repetition of a given multi-set.
+ *Ensure your program efficiently avoids duplicated permutations.
+ *Test it with { 1, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5 }.
+ */
+
 package homeWork2;
 
 import java.lang.reflect.Array;
@@ -20,7 +28,6 @@ public class PermutationsWithRepetition {
 				for (int j = i + 1; j < n; j++) {
 					if (ps[i] != ps[j]) {
 
-						// swap ps[i] <--> ps[j]
 						tmp = ps[i];
 						ps[i] = ps[j];
 						ps[j] = tmp;
@@ -29,8 +36,6 @@ public class PermutationsWithRepetition {
 					}
 				}
 
-				// Undo all modifications done by
-				// recursive calls and swapping
 				tmp = ps[i];
 				for (int k = i; k < n - 1;)
 					ps[k] = ps[++k];
@@ -47,9 +52,10 @@ public class PermutationsWithRepetition {
 	}
 
 	public static void main(String[] args) {
-		int[] a = { 1, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5 };
+		int[] a = { 1, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5,
+				5, 5, 5, 5, 5, 5, 5, 5 };
 		permutationsRep(a);
-		
+
 	}
 
 }

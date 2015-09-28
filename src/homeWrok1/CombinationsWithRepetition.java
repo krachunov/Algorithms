@@ -9,7 +9,7 @@ public class CombinationsWithRepetition {
 	static int c = 0;
 	static int[] loops;
 	static int numberOfIterations = 3;
-	static int numberOfLoops = 2;
+	static int numberOfLoops = 3;
 
 	public static void nestedLoops(int currentLoop) {
 		if (currentLoop == numberOfLoops) {

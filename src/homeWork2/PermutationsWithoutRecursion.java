@@ -19,17 +19,20 @@ public class PermutationsWithoutRecursion {
 	static boolean[] used;
 	static int totalPermutatin = 0;
 
-	public static void permute(int i, int n) {
+	public static void permute(int n) {
 
-		while (n>0) {
-			for (int j = 1; j < loops.length - 1; j++) {
-				loops[i] = j;
-				i++;
-				if (i >= n) {
-					printLoops(n);
-					n--;
-					i = 0;
+		int index = loops.length-1 ;
+		int count = 1;
+			while (true) {
+				for (int i = 1; i <= n; i++) {
+				loops[index] = i;
+				printLoops(n);
+				if(i>=n){
+					int tmp = loops[index-1];
+					loops[index-1]=++tmp;
+					break;
 				}
+			
 			}
 		}
 	}
@@ -48,8 +51,8 @@ public class PermutationsWithoutRecursion {
 		sc.close();
 		loops = new int[n];
 		used = new boolean[n];
-		permute(0, n);
-		System.out.println("Totatl permutaions: " + totalPermutatin);
+		permute(n);
+		// System.out.println("Totatl permutaions: " + totalPermutatin);
 	}
 
 }

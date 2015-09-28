@@ -43,22 +43,22 @@ public class Snake {
 
 		if (snakeLength > 0) {
 
-			matrix[row][col] = 'x';
-			snakeCount++;
-			dir.add(symbol);
 			snakeLength--;
+			matrix[row][col] = 'x';
+			dir.add(symbol);
+			
 			findPath(matrix, row, col + 1, 'R', dir);
 			findPath(matrix, row + 1, col, 'D', dir);
 			findPath(matrix, row, col - 1, 'L', dir);
 			findPath(matrix, row - 1, col, 'U', dir);
 
+			snakeLength++;
 			matrix[row][col] = ' ';
 			dir.remove(dir.size() - 1);
-			snakeLength++;
 
 		} else {
 			printDir(dir);
-			
+
 			return;
 		}
 

@@ -9,7 +9,7 @@ package homeWork2;
 
 import java.util.Scanner;
 
-public class CombinationsWithOutRepetition {
+public class GenerateSubsetsStringArray {
 	static int c = 0;
 	static String[] loops;
 	static String[] stringElement;

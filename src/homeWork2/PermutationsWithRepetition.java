@@ -47,7 +47,7 @@ public class PermutationsWithRepetition {
 	}
 
 	public static void main(String[] args) {
-		int[] a = { 1, 3, 5, 5 };
+		int[] a = { 1, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5 };
 		permutationsRep(a);
 		
 	}

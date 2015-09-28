@@ -42,26 +42,24 @@ public class Snake {
 		}
 
 		if (snakeLength > 0) {
-
 			snakeLength--;
 			matrix[row][col] = 'x';
 			dir.add(symbol);
-			
+
 			findPath(matrix, row, col + 1, 'R', dir);
 			findPath(matrix, row + 1, col, 'D', dir);
 			findPath(matrix, row, col - 1, 'L', dir);
 			findPath(matrix, row - 1, col, 'U', dir);
 
 			snakeLength++;
+
 			matrix[row][col] = ' ';
 			dir.remove(dir.size() - 1);
 
 		} else {
 			printDir(dir);
-
 			return;
 		}
-
 	}
 
 	public static void main(String[] args) {
@@ -75,7 +73,9 @@ public class Snake {
 				{ ' ', ' ', ' ', ' ', ' ', ' ' },
 				{ ' ', ' ', ' ', ' ', ' ', ' ' },
 				{ ' ', ' ', ' ', ' ', ' ', ' ' } };
-		findPath(matrix, 0, 0, 'S', dir);
 
+	
+		findPath(matrix, 0, 0, 'S', dir);
+		// System.out.println(snakeCount);
 	}
 }

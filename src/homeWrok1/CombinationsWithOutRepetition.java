@@ -44,17 +44,13 @@ public class CombinationsWithOutRepetition {
 	}
 
 	public static void main(String[] args) {
-
-		int n = 4;
-		int k = 3;
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Enter the number n");
 		int n = sc.nextInt();
 		System.out.println("Enter the number k");
 		int k = sc.nextInt();
 		loops = new int[k];
-		nestedLoops(0, 0, n, k);
-		System.out.println("Totatl permutaions: " + totalPermutatin);
+		nestedLoops(0, 1, n, k);
 		System.out.println("Totatl permutaions: " + totalPermutatin);
 	}
 }

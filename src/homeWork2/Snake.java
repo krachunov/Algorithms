@@ -18,19 +18,19 @@ import java.util.Stack;
 public class Snake {
 	static Stack<Character> dir = new Stack<Character>();
 	static int snakeLength;
+	static int snakeCount = 0;
 
 	static void printDir(List<Character> dir) {
 		System.out.println();
 		for (Character character : dir) {
 			System.out.print(character);
 		}
+
 	}
 
-	public static void findPath(char[][] matrix, int x, int y, char symbol,
+	public static void findPath(char[][] matrix, int row, int col, char symbol,
 			List<Character> dir) {
-		int count = 0;
-		int row = x;
-		int col = y;
+
 		// check if out of array
 		if (row < 0 || col < 0 || row >= matrix.length
 				|| col >= matrix[row].length) {
@@ -44,19 +44,21 @@ public class Snake {
 		if (snakeLength > 0) {
 
 			matrix[row][col] = 'x';
-
+			snakeCount++;
 			dir.add(symbol);
 			snakeLength--;
-			findPath(matrix, x, y + 1, 'R', dir);
-			findPath(matrix, x + 1, y, 'D', dir);
-			findPath(matrix, x, y - 1, 'L', dir);
-			findPath(matrix, x - 1, y, 'U', dir);
+			findPath(matrix, row, col + 1, 'R', dir);
+			findPath(matrix, row + 1, col, 'D', dir);
+			findPath(matrix, row, col - 1, 'L', dir);
+			findPath(matrix, row - 1, col, 'U', dir);
 
 			matrix[row][col] = ' ';
 			dir.remove(dir.size() - 1);
 			snakeLength++;
+
 		} else {
 			printDir(dir);
+			
 			return;
 		}
 
@@ -74,5 +76,6 @@ public class Snake {
 				{ ' ', ' ', ' ', ' ', ' ', ' ' },
 				{ ' ', ' ', ' ', ' ', ' ', ' ' } };
 		findPath(matrix, 0, 0, 'S', dir);
+
 	}
 }

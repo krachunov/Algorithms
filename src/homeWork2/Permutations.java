@@ -47,6 +47,7 @@ public class Permutations {
 	}
 
 	public static void main(String[] args) {
+		
 		System.out.println("Enter the num of n");
 		Scanner sc = new Scanner(System.in);
 		int n = sc.nextInt();

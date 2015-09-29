@@ -30,7 +30,7 @@ public class Snake {
 
 	public static void findPath(char[][] matrix, int row, int col, char symbol,
 			List<Character> dir) {
-
+		
 		// check if out of array
 		if (row < 0 || col < 0 || row >= matrix.length
 				|| col >= matrix[row].length) {
@@ -40,7 +40,7 @@ public class Snake {
 		if (matrix[row][col] != ' ') {
 			return;
 		}
-
+		
 		if (snakeLength > 0) {
 			snakeLength--;
 			matrix[row][col] = 'x';
@@ -53,6 +53,7 @@ public class Snake {
 
 			snakeLength++;
 
+			
 			matrix[row][col] = ' ';
 			dir.remove(dir.size() - 1);
 

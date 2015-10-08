@@ -1,8 +1,7 @@
 package homeWork3;
 
 public class MyMergeSort {
-	public static void mertgeSort(int[] arr) {
+	public static void mertgeSort(int[] arr, int start, int edn) {
 		
-
 	}
 }

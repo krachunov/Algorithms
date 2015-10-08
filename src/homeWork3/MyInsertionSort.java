@@ -16,6 +16,9 @@ public class MyInsertionSort {
 	}
 
 	public static void sorting(int[] arr) {
+		if (arr == null || arr.length < 0) {
+			System.out.println("There is no valid array");
+		}
 		int sortedIndex = 0;
 		int currentIndex = -1;
 		while (sortedIndex < arr.length) {
@@ -51,8 +54,9 @@ public class MyInsertionSort {
 		int[] d = { 2, 3, 4, 5, 1, 6 };
 		int[] e = { 2, 3, 4, 1, 5 };
 		int[] f = { 2, 3, 4, 1, 5, 1, 1, 5 };
+		int[] g = {};
 
-		sorting(f);
+		sorting(g);
 
 	}
 }

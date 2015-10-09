@@ -4,9 +4,9 @@ import java.util.Arrays;
 
 public class MyMergeSort {
 	public static void mertgeSort(int[] arr) {
-		for (int i : arr) {
-			System.out.print(i + " ");
-		}
+//		for (int i : arr) {
+//			System.out.print(i + " ");
+//		}
 		System.out.println();
 
 		int start = 0;
@@ -31,8 +31,9 @@ public class MyMergeSort {
 			int rigthIndex = 0;
 
 			for (int i = 0; i < sortedArr.length; i++) {
-				if (leftIndex < firstArr.length
-						&& rigthIndex < secondtArr.length) {
+				
+				if (leftIndex < firstArr.length&& rigthIndex < secondtArr.length) {
+					
 					if (firstArr[leftIndex] <= secondtArr[rigthIndex]) {
 						sortedArr[i] = firstArr[leftIndex];
 						leftIndex++;
@@ -40,16 +41,14 @@ public class MyMergeSort {
 						sortedArr[i] = secondtArr[rigthIndex];
 						rigthIndex++;
 					}
-				} else if (leftIndex < firstArr.length
-						&& rigthIndex > secondtArr.length) {
+				} else if (leftIndex < firstArr.length&& rigthIndex >= secondtArr.length) {
 					sortedArr[i] = firstArr[leftIndex];
 					leftIndex++;
-				} else if (leftIndex > firstArr.length
-						&& rigthIndex < secondtArr.length) {
+				} else if (leftIndex >= firstArr.length&& rigthIndex < secondtArr.length) {
 					sortedArr[i] = secondtArr[rigthIndex];
 					rigthIndex++;
 				} else {
-					return;
+//					return;
 				}
 			}
 			return;
@@ -60,5 +59,9 @@ public class MyMergeSort {
 		int[] f = { 38, 27, 43, 3, 9, 82, 10 };
 		// int[] a = new int[f.length];
 		mertgeSort(f);
+		
+		for (int i : f) {
+			System.out.print(i+" ");
+		}
 	}
 }

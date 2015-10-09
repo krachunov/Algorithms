@@ -16,15 +16,20 @@ public class MyMergeSort {
 		int[] secondtArr = new int[end - mid];
 		int[] sortedArr = new int[firstArr.length + secondtArr.length];
 
-		if (arr.length > 1) {
-			firstArr = Arrays.copyOfRange(arr, start, mid);
-			secondtArr = Arrays.copyOfRange(arr, mid, end);
-			mertgeSort(firstArr);
-			mertgeSort(secondtArr);
-		} else {
+		firstArr = Arrays.copyOfRange(arr, start, mid);
+		secondtArr = Arrays.copyOfRange(arr, mid, end);
+
+
+			if (firstArr.length > 1) {
+				mertgeSort(firstArr);
+			}
+			if (secondtArr.length > 1) {
+				mertgeSort(secondtArr);
+			}
+		
 			int leftIndex = 0;
 			int rigthIndex = 0;
-			
+
 			for (int i = 0; i < sortedArr.length; i++) {
 				if (leftIndex < firstArr.length
 						&& rigthIndex < secondtArr.length) {
@@ -35,23 +40,25 @@ public class MyMergeSort {
 						sortedArr[i] = secondtArr[rigthIndex];
 						rigthIndex++;
 					}
-				} else if (leftIndex < firstArr.length&& rigthIndex > secondtArr.length) {
+				} else if (leftIndex < firstArr.length
+						&& rigthIndex > secondtArr.length) {
 					sortedArr[i] = firstArr[leftIndex];
 					leftIndex++;
-				} else if (leftIndex > firstArr.length&& rigthIndex < secondtArr.length)  {
+				} else if (leftIndex > firstArr.length
+						&& rigthIndex < secondtArr.length) {
 					sortedArr[i] = secondtArr[rigthIndex];
 					rigthIndex++;
-				}else{
+				} else {
 					return;
 				}
 			}
 			return;
-		}
+		
 	}
 
 	public static void main(String[] args) {
 		int[] f = { 38, 27, 43, 3, 9, 82, 10 };
-//		int[] a = new int[f.length];
+		// int[] a = new int[f.length];
 		mertgeSort(f);
 	}
 }

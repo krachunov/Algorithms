@@ -50,11 +50,18 @@ public class MyMergeSort {
 	}
 
 	public static void main(String[] args) {
-		int[] f = { 38, 27, 43, 3, 9, 82, 10 };
+		int[] fd = { 38, 27, 43, 3, 9, 82, 10 };
+		int[] a = { 5, 4, 3, 2, 1 };
+		int[] b = { 1, 2, 3, 4, 5 };
+		int[] c = { 2, 3, 4, 5, 1 };
+		int[] d = { 2, 3, 4, 5, 1, 6 };
+		int[] e = { 2, 3, 4, 1, 5 };
+		int[] f = { 2, 3, 4, 1, 5, 1, 1, 5 };
+		int[] g = {};
 		
-		int[] a = mertgeSort(f);
+		int[] sorted = mertgeSort(fd);
 
-		for (int i : a) {
+		for (int i : sorted) {
 			System.out.print(i + " ");
 		}
 	}

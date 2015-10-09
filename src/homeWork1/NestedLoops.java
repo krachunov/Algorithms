@@ -1,4 +1,4 @@
-package homeWrok1;
+package homeWork1;
 
 public class NestedLoops {
 

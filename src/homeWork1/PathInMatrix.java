@@ -6,7 +6,7 @@ Examples:
 Let’s consider the following layout:
 
  */
-package homeWrok1;
+package homeWork1;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -3,7 +3,7 @@
 Modify the previous program to skip duplicates, e.g. (1 1) is not valid.
 
  */
-package homeWrok1;
+package homeWork1;
 
 import java.util.Scanner;
 

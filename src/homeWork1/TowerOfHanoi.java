@@ -9,7 +9,7 @@ Your objective is to move all disks from the source rod to the destination rod. 
 
  */
 
-package homeWrok1;
+package homeWork1;
 
 import java.util.Scanner;
 import java.util.Stack;

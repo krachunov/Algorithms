@@ -1,3 +1,11 @@
+/**
+ * Problem 4.	Implement Heap Sort
+Implement the HeapSort algorithm. It works by building a min-heap from an unsorted array and then taking the smallest element repeatedly until the heap is empty. You can learn more about the Heap structure and get a complete implementation from the Advanced Tree Structures lecture (Data Structures course) or you may implement it yourself.
+Test the HeapSorter using the provided unit tests.
+
+ */
+
+
 package homeWork3;
 import java.io.ObjectInputStream.GetField;
 import java.util.ArrayList;

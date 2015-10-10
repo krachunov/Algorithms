@@ -1,6 +1,9 @@
 package homeWork3;
+import java.io.ObjectInputStream.GetField;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.List;
 public class MyHeapsSort<T extends Comparable<T>> implements Comparator<T> {
 
 	public int compare(T a, T b) {
@@ -217,5 +220,27 @@ public class MyHeapsSort<T extends Comparable<T>> implements Comparator<T> {
 				System.out.println(element);
 			}
 		}
+	}
+	private boolean isEmpty(){
+		return arr.length<0;
+		
+	}
+	/**
+	 * 
+	 * @param arrToSort
+	 * @return
+	 */
+	public List<T> heapSort(T[] arrToSort){
+		MyHeapsSort<T>a = new MyHeapsSort<T>();
+		for (T object : arrToSort) {
+			a.enqueue(object);
+		}
+		System.out.println();
+		List<T>sorted = new ArrayList<T>();
+		while(a.getCount()>0){
+			sorted.add(a.dequeue());
+		}
+		return sorted;
+		
 	}
 }

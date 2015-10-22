@@ -4,10 +4,14 @@ import java.util.List;
 
 public class Node {
 	int value;
-	List<Node>child;
-	boolean visit;
+	List<Node> child;
+	boolean isVisit;
 
-	
+	public Node(int value) {
+		setValue(value);
+		setVisit(false);
+	}
+
 	public int getValue() {
 		return value;
 	}
@@ -25,11 +29,11 @@ public class Node {
 	}
 
 	public boolean isVisit() {
-		return visit;
+		return isVisit;
 	}
 
 	public void setVisit(boolean visit) {
-		this.visit = visit;
+		this.isVisit = visit;
 	}
 
 }

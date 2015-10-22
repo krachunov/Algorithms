@@ -2,29 +2,34 @@ package homeWork5;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 public class DistanceBetweenVertices {
-	private List<Node> allNodes;
+	private List<List<Integer>> allNode;
 
-	public DistanceBetweenVertices() {
-		allNodes = new ArrayList<Node>();
+	public DistanceBetweenVertices(int numberofNode) {
+		setAllNode(new ArrayList<List<Integer>>());
+		for (int i = 0; i <= numberofNode; i++) {
+			getAllNode().add(new ArrayList<Integer>());
+		}
 	}
 
-	public List<Node> getAllNodes() {
-		return allNodes;
+	public void addChild(int parent, int child) {
+		if (parent > getAllNode().size()) {
+			System.err.println("There is no such node");
+		}
+		getAllNode().get(parent).add(child);
 	}
 
-	public void setAllNodes(List<Node> allNodes) {
-		this.allNodes = allNodes;
+	public List<List<Integer>> getAllNode() {
+		return allNode;
 	}
 
-	public void addNode() {
-
+	public void setAllNode(List<List<Integer>> allNode) {
+		this.allNode = allNode;
 	}
 
 	public static void main(String[] args) {
-		DistanceBetweenVertices graph = new DistanceBetweenVertices();
-
+		DistanceBetweenVertices graph = new DistanceBetweenVertices(2);
+		graph.addChild(1, 2);
 	}
 }

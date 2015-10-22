@@ -20,6 +20,19 @@ public class DistanceBetweenVertices {
 		getAllNode().get(parent).add(child);
 	}
 
+	public int distanceBetween(int start, int end) {
+		if (start == end) {
+			return 1;
+		} else {
+			List<Integer> currentList = getAllNode().get(start);
+			for (Integer integer : currentList) {
+				distanceBetween(start, integer);
+			}
+
+		}
+		return -1;
+	}
+
 	public List<List<Integer>> getAllNode() {
 		return allNode;
 	}
@@ -31,5 +44,7 @@ public class DistanceBetweenVertices {
 	public static void main(String[] args) {
 		DistanceBetweenVertices graph = new DistanceBetweenVertices(2);
 		graph.addChild(1, 2);
+		int x = graph.distanceBetween(1, 2);
+		System.out.println(x);
 	}
 }

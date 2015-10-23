@@ -2,6 +2,7 @@ package homeWork5;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Stack;
 
 public class DistanceBetweenVertices {
 	private List<List<Integer>> allNode;
@@ -29,23 +30,31 @@ public class DistanceBetweenVertices {
 
 	public int distanceBetween(int start, int end) {
 		int sum = 0;
-		if (start == end) {
-			return sum;
-		}
-		
-		getViewNode().set(start, true);
+		Stack<Integer> stack = new Stack<Integer>();
+		stack.push(start);
+		int currentNode = -1;
 
-		List<Integer> currentNode = getAllNode().get(start);
-		if (currentNode.size() > 0) {
-			for (Integer child : currentNode) {
-				if (getViewNode().get(child) != true) {
-					distanceBetween(child, end);
+		do {
+			currentNode = stack.pop();
+			if (currentNode == end) {
+				return sum;
+			}
+			sum++;
+			getViewNode().set(currentNode, true);
+			List<Integer> currentNodeChildList = getAllNode().get(currentNode);
+
+			if (currentNodeChildList.size() > 0) {
+				for (Integer child : currentNodeChildList) {
+					if (getViewNode().get(child) != true) {
+						stack.push(child);
+					}
 				}
 			}
-			getViewNode().set(start, false);
-			return sum;
-		}
-		return 0;
+
+		} while (stack.size() > 0);
+
+		return -1;
+
 	}
 
 	public List<List<Integer>> getAllNode() {

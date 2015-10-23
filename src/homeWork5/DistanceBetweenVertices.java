@@ -5,11 +5,14 @@ import java.util.List;
 
 public class DistanceBetweenVertices {
 	private List<List<Integer>> allNode;
+	private List<Boolean> viewNode;
 
 	public DistanceBetweenVertices(int numberofNode) {
 		setAllNode(new ArrayList<List<Integer>>());
+		setViewNode(new ArrayList<Boolean>());
 		for (int i = 0; i <= numberofNode; i++) {
 			getAllNode().add(new ArrayList<Integer>());
+			getViewNode().add(false);
 		}
 	}
 
@@ -27,13 +30,22 @@ public class DistanceBetweenVertices {
 	public int distanceBetween(int start, int end) {
 		int sum = 0;
 		if (start == end) {
-			return 1;
+			return sum;
 		}
+		
+		getViewNode().set(start, true);
+
 		List<Integer> currentNode = getAllNode().get(start);
-		for (Integer child : currentNode) {
-			return sum+distanceBetween(child, end);
+		if (currentNode.size() > 0) {
+			for (Integer child : currentNode) {
+				if (getViewNode().get(child) != true) {
+					distanceBetween(child, end);
+				}
+			}
+			getViewNode().set(start, false);
+			return sum;
 		}
-		return sum;
+		return 0;
 	}
 
 	public List<List<Integer>> getAllNode() {
@@ -42,6 +54,14 @@ public class DistanceBetweenVertices {
 
 	public void setAllNode(List<List<Integer>> allNode) {
 		this.allNode = allNode;
+	}
+
+	public List<Boolean> getViewNode() {
+		return viewNode;
+	}
+
+	public void setViewNode(List<Boolean> viewNode) {
+		this.viewNode = viewNode;
 	}
 
 	public static void main(String[] args) {
@@ -55,7 +75,7 @@ public class DistanceBetweenVertices {
 		graph.addChild(7, 8);
 		graph.addChild(8);
 		System.out.println();
-		 int x = graph.distanceBetween(1, 6);
-		 System.out.println(x);
+		int x = graph.distanceBetween(3, 8);
+		System.out.println(x);
 	}
 }

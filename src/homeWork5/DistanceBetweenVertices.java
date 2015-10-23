@@ -30,6 +30,28 @@ public class DistanceBetweenVertices {
 		}
 	}
 
+	// recursive method
+	public int distanceBetweenRecursive(int start, int end) {
+		int sum = 0;
+		if (start == end) {
+			return sum;
+		}
+		getViewNode().set(start, true);
+
+		List<Integer> currentNode = getAllNode().get(start);
+		if (currentNode.size() > 0) {
+			for (Integer child : currentNode) {
+				if (getViewNode().get(child) != true) {
+					distanceBetweenRecursive(child, end);
+				}
+			}
+			getViewNode().set(start, false);
+			return sum;
+		}
+		return 0;
+	}
+
+	// Iterative method
 	public int distanceBetween(int start, int end) {
 		int sum = 0;
 		Queue<Integer> queue = new LinkedList<Integer>();
@@ -41,7 +63,7 @@ public class DistanceBetweenVertices {
 			if (currentNode == end) {
 				return sum;
 			}
-			
+
 			getViewNode().set(currentNode, true);
 			List<Integer> currentNodeChildList = getAllNode().get(currentNode);
 
@@ -54,7 +76,7 @@ public class DistanceBetweenVertices {
 					}
 				}
 			}
-			
+
 		} while (queue.size() > 0);
 
 		return -1;

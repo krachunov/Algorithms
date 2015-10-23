@@ -1,7 +1,9 @@
 package homeWork5;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 import java.util.Stack;
 
 public class DistanceBetweenVertices {
@@ -30,28 +32,30 @@ public class DistanceBetweenVertices {
 
 	public int distanceBetween(int start, int end) {
 		int sum = 0;
-		Stack<Integer> stack = new Stack<Integer>();
-		stack.push(start);
+		Queue<Integer> queue = new LinkedList<Integer>();
+		queue.offer(start);
 		int currentNode = -1;
 
 		do {
-			currentNode = stack.pop();
+			currentNode = queue.poll();
 			if (currentNode == end) {
 				return sum;
 			}
-			sum++;
+			
 			getViewNode().set(currentNode, true);
 			List<Integer> currentNodeChildList = getAllNode().get(currentNode);
 
 			if (currentNodeChildList.size() > 0) {
+				sum++;
 				for (Integer child : currentNodeChildList) {
 					if (getViewNode().get(child) != true) {
-						stack.push(child);
+						queue.offer(child);
+
 					}
 				}
 			}
-
-		} while (stack.size() > 0);
+			
+		} while (queue.size() > 0);
 
 		return -1;
 

@@ -1,3 +1,11 @@
+/**
+ * Problem 1.	Distance between Vertices
+We are given a directed graph consisting of N vertices and M edges.
+We are given also a set of pairs of vertices. Find the shortest distance between each pair of vertices or -1 if there is no path connecting them.
+There are no specified requirements for the input and output, so you may hardcode the input and output values.
+
+ */
+
 package homeWork5;
 
 import java.util.ArrayList;

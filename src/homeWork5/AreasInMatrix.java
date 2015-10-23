@@ -1,3 +1,9 @@
+/**
+ * Problem 2.	Areas in Matrix
+We are given a matrix of letters of size N * M. Two cells are neighbor if they share a common wall.
+Write a program to find the connected areas of neighbor cells holding the same letter.
+Display the total number of areas and the number of areas for each alphabetical letter. 
+ */
 package homeWork5;
 
 import homeWork1.Area;
@@ -81,7 +87,7 @@ public class AreasInMatrix {
 			{ '*', ' ', ' ', '*', '*', '*', '*', '*', ' ', ' ' },
 			{ '*', ' ', ' ', '*', ' ', ' ', ' ', '*', ' ', ' ' },
 			{ '*', ' ', ' ', '*', ' ', ' ', ' ', '*', ' ', ' ' } };
-	
+
 	public static void discoveryLab(char[][] matrixLab) {
 		for (int x = 0; x < matrixLab.length; x++) {
 			for (int y = 0; y < matrixLab[0].length; y++) {
@@ -122,8 +128,9 @@ public class AreasInMatrix {
 	}
 
 	public static void main(String[] args) {
-		
-		//If you want to test with another lab, change argument in method discoveryLab(), with "matrix2"
+
+		// If you want to test with another lab, change argument in method
+		// discoveryLab(), with "matrix2"
 		discoveryLab(matrix2);
 
 		listAreas.sort(new Comparator<Area>() {

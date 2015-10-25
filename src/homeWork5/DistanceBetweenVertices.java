@@ -41,26 +41,29 @@ public class DistanceBetweenVertices {
 
 	// recursive method
 	private int distanceBetweenRecursive(int counter, int start, int end) {
+		int tempCount = getCount();
 
-		int sum = 0;
 		if (start == end) {
-			return counter;
+			return getCount();
 		}
 		getViewNode().set(start, true);
 
 		List<Integer> currentNode = getAllNode().get(start);
 		if (currentNode.size() > 0) {
 			for (Integer child : currentNode) {
-				int tempCount = getCount();
 				if (getViewNode().get(child) != true) {
 					setCount(++tempCount);
-					return distanceBetweenRecursive(tempCount, child, end);
+					distanceBetweenRecursive(getCount(), child, end);
+
+				} else {
+					continue;
 				}
-				setCount(--tempCount);
 			}
-			getViewNode().set(start, false);
-			return counter;
+			return getCount();
 		}
+		--tempCount;
+		setCount(tempCount);
+		getViewNode().set(start, false);
 		return -1;
 	}
 

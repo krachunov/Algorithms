@@ -17,6 +17,7 @@ import java.util.Stack;
 public class DistanceBetweenVertices {
 	private List<List<Integer>> allNode;
 	private List<Boolean> viewNode;
+	int count = 0;
 
 	public DistanceBetweenVertices(int numberofNode) {
 		setAllNode(new ArrayList<List<Integer>>());
@@ -39,24 +40,32 @@ public class DistanceBetweenVertices {
 	}
 
 	// recursive method
-	public int distanceBetweenRecursive(int start, int end) {
+	private int distanceBetweenRecursive(int counter, int start, int end) {
+
 		int sum = 0;
 		if (start == end) {
-			return sum;
+			return counter;
 		}
 		getViewNode().set(start, true);
 
 		List<Integer> currentNode = getAllNode().get(start);
 		if (currentNode.size() > 0) {
 			for (Integer child : currentNode) {
+				int tempCount = getCount();
 				if (getViewNode().get(child) != true) {
-					distanceBetweenRecursive(child, end);
+					setCount(++tempCount);
+					return distanceBetweenRecursive(tempCount, child, end);
 				}
+				setCount(--tempCount);
 			}
 			getViewNode().set(start, false);
-			return sum;
+			return counter;
 		}
-		return 0;
+		return -1;
+	}
+
+	public int distanceBetweenRecursive(int start, int end) {
+		return distanceBetweenRecursive(getCount(), start, end);
 	}
 
 	// Iterative method
@@ -107,6 +116,14 @@ public class DistanceBetweenVertices {
 		this.viewNode = viewNode;
 	}
 
+	public int getCount() {
+		return count;
+	}
+
+	public void setCount(int count) {
+		this.count = count;
+	}
+
 	public static void main(String[] args) {
 		DistanceBetweenVertices graph = new DistanceBetweenVertices(8);
 		graph.addChild(1, 4);
@@ -118,7 +135,9 @@ public class DistanceBetweenVertices {
 		graph.addChild(7, 8);
 		graph.addChild(8);
 		System.out.println();
-		int x = graph.distanceBetween(3, 8);
+		// int x = graph.distanceBetween(3, 8);
+		int x = graph.distanceBetweenRecursive(3, 5);
+
 		System.out.println(x);
 	}
 }

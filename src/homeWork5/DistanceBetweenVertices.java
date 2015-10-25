@@ -62,53 +62,6 @@ public class DistanceBetweenVertices {
 		distanceBetweenRecursive(getCount(), start, end);
 	}
 
-	/*
-	 * private int distanceBetweenRecursive(int counter, int start, int end) {
-	 * int tempCount = counter;
-	 * 
-	 * if (start == end) { return getCount(); } getViewNode().set(start, true);
-	 * 
-	 * List<Integer> currentNode = getAllNode().get(start); if
-	 * (currentNode.size() > 0) { for (Integer child : currentNode) { if
-	 * (getViewNode().get(child) != true) { tempCount++; int x =
-	 * distanceBetweenRecursive(tempCount, child, end); if (x == end) {
-	 * 
-	 * return getCount(); } } else { continue; } } return getCount(); }
-	 * tempCount = getCount(); tempCount--; setCount(tempCount);
-	 * getViewNode().set(start, false); return -1; }
-	 */
-	// Iterative method
-	public int distanceBetween(int start, int end) {
-		int sum = 0;
-		Queue<Integer> queue = new LinkedList<Integer>();
-		queue.offer(start);
-		int currentNode = -1;
-
-		do {
-			currentNode = queue.poll();
-			if (currentNode == end) {
-				return sum;
-			}
-
-			getViewNode().set(currentNode, true);
-			List<Integer> currentNodeChildList = getAllNode().get(currentNode);
-
-			if (currentNodeChildList.size() > 0) {
-				sum++;
-				for (Integer child : currentNodeChildList) {
-					if (getViewNode().get(child) != true) {
-						queue.offer(child);
-
-					}
-				}
-			}
-
-		} while (queue.size() > 0);
-
-		return -1;
-
-	}
-
 	public List<List<Integer>> getAllNode() {
 		return allNode;
 	}

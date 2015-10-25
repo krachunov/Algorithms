@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.Stack;
 
 public class CyclesInGraph {
 	private List<List<Integer>> allNode;
@@ -41,29 +42,31 @@ public class CyclesInGraph {
 	}
 
 	// recursive method
-	private void DFS(int start) {
-		if (getViewNode().get(start) == true) {
-			System.out.println("Acyclic: No");
-			return;
-		}
+	private boolean DFS(int start) {
 		getViewNode().set(start, true);
-		List<Integer> currentNode = getAllNode().get(start);
-		for (Integer child : currentNode) {
-			if (getViewNode().get(child) != true) {
-				DFS(child);
-				// getViewNode().set(child, false);
+		List<Integer> childrens = getAllNode().get(start);
+		for (Integer child : childrens) {
+			if (getViewNode().get(child) == true) {
+				return true;
+			} else {
+				return DFS(child);
 			}
-
 		}
-		return;
+
+		return false;
 	}
 
 	public void checkIsCycles() {
 		for (Integer node : getEverySingleNode()) {
 			if (getViewNode().get(node) != true) {
-				DFS(node);
+				boolean isCycle = (DFS(node));
+				if (isCycle == true) {
+					System.out.println("Acycle: NO");
+					return;
+				}
 			}
 		}
+		System.out.println("Acycle: YES");
 	}
 
 	public List<List<Integer>> getAllNode() {
@@ -101,7 +104,7 @@ public class CyclesInGraph {
 	public static void main(String[] args) {
 		CyclesInGraph graph = new CyclesInGraph(8);
 		graph.addChild(1, 4);
-		graph.addChild(4, 1);
+		graph.addChild(2, 4);
 		graph.addChild(3, 4, 5);
 		graph.addChild(4, 6);
 		graph.addChild(5, 3, 7, 8);

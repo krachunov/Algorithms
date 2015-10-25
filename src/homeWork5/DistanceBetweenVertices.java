@@ -59,6 +59,7 @@ public class DistanceBetweenVertices {
 
 	public void distanceBetweenRecursive(int start, int end) {
 		setCount(0);
+//		getViewNode().clear();
 		distanceBetweenRecursive(getCount(), start, end);
 	}
 
@@ -98,7 +99,13 @@ public class DistanceBetweenVertices {
 		graph.addChild(8);
 		System.out.println();
 
-		graph.distanceBetweenRecursive(2, 1);
+		graph.distanceBetweenRecursive(1, 6);
+		System.out.println("--------------------");
+		graph.distanceBetweenRecursive(1, 5);
+		System.out.println("--------------------");
+		graph.distanceBetweenRecursive(5, 6);
+		System.out.println("--------------------");
+		graph.distanceBetweenRecursive(5, 8);
 
 	}
 }

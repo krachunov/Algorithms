@@ -40,37 +40,42 @@ public class DistanceBetweenVertices {
 	}
 
 	// recursive method
-	private int distanceBetweenRecursive(int counter, int start, int end) {
-		int tempCount = getCount();
-
-		if (start == end) {
-			return getCount();
-		}
+	private void distanceBetweenRecursive(int counter, int start, int end) {
 		getViewNode().set(start, true);
-
-		List<Integer> currentNode = getAllNode().get(start);
-		if (currentNode.size() > 0) {
-			for (Integer child : currentNode) {
-				if (getViewNode().get(child) != true) {
-					setCount(++tempCount);
-					distanceBetweenRecursive(getCount(), child, end);
-
-				} else {
-					continue;
-				}
-			}
-			return getCount();
+		if (start == end) {
+			System.out.println(counter);
+			return;
 		}
-		--tempCount;
-		setCount(tempCount);
-		getViewNode().set(start, false);
-		return -1;
+		List<Integer> currentNode = getAllNode().get(start);
+		for (Integer child : currentNode) {
+			if (getViewNode().get(child) != true) {
+				distanceBetweenRecursive(getCount() + 1, child, end);
+				getViewNode().set(child, false);
+			}
+
+		}
+		return;
 	}
 
-	public int distanceBetweenRecursive(int start, int end) {
-		return distanceBetweenRecursive(getCount(), start, end);
+	public void distanceBetweenRecursive(int start, int end) {
+		distanceBetweenRecursive(getCount(), start, end);
 	}
 
+	/*
+	 * private int distanceBetweenRecursive(int counter, int start, int end) {
+	 * int tempCount = counter;
+	 * 
+	 * if (start == end) { return getCount(); } getViewNode().set(start, true);
+	 * 
+	 * List<Integer> currentNode = getAllNode().get(start); if
+	 * (currentNode.size() > 0) { for (Integer child : currentNode) { if
+	 * (getViewNode().get(child) != true) { tempCount++; int x =
+	 * distanceBetweenRecursive(tempCount, child, end); if (x == end) {
+	 * 
+	 * return getCount(); } } else { continue; } } return getCount(); }
+	 * tempCount = getCount(); tempCount--; setCount(tempCount);
+	 * getViewNode().set(start, false); return -1; }
+	 */
 	// Iterative method
 	public int distanceBetween(int start, int end) {
 		int sum = 0;
@@ -138,9 +143,8 @@ public class DistanceBetweenVertices {
 		graph.addChild(7, 8);
 		graph.addChild(8);
 		System.out.println();
-		// int x = graph.distanceBetween(3, 8);
-		int x = graph.distanceBetweenRecursive(3, 5);
 
-		System.out.println(x);
+		graph.distanceBetweenRecursive(3, 7);
+
 	}
 }

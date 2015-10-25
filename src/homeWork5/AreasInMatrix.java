@@ -6,13 +6,10 @@ Display the total number of areas and the number of areas for each alphabetical 
  */
 package homeWork5;
 
-import homeWork1.Area;
-
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Scanner;
-import java.util.TreeMap;
 
 public class AreasInMatrix {
 	static int count = 0;
@@ -65,8 +62,9 @@ public class AreasInMatrix {
 
 		@Override
 		public String toString() {
-			return "Symbol: "+getSymbol()+ " - Position X/Y: " + getPositionX() + "/" + getPositionY()
-					+ " size: " + getSize();
+			return "Symbol: " + getSymbol() + " - Position X/Y: "
+					+ getPositionX() + "/" + getPositionY() + " size: "
+					+ getSize();
 
 		}
 
@@ -88,16 +86,13 @@ public class AreasInMatrix {
 		}
 	}
 
-	static char[][] matrix = { 
-		{ 'a', 'a', 'c', 'c', 'c', 'a', 'a', 'c' },
-		{ 'b', 'a', 'a', 'a', 'a', 'c', 'c', 'c' },
-		{ 'b', 'a', 'a', 'c', 'a', 'c', 'c', 'c' },
-		{ 'b', 'b', 'd', 'a', 'a', 'c', 'c', 'c' },
-		{ 'c', 'c', 'd', 'c', 'c', 'c', 'c', 'c' },
-		{ 'c', 'c', 'd', 'c', 'c', 'c', 'c', 'c' }, };
+	static char[][] matrix = { { 'a', 'a', 'c', 'c', 'c', 'a', 'a', 'c' },
+			{ 'b', 'a', 'a', 'a', 'a', 'c', 'c', 'c' },
+			{ 'b', 'a', 'a', 'c', 'a', 'c', 'c', 'c' },
+			{ 'b', 'b', 'd', 'a', 'a', 'c', 'c', 'c' },
+			{ 'c', 'c', 'd', 'c', 'c', 'c', 'c', 'c' },
+			{ 'c', 'c', 'd', 'c', 'c', 'c', 'c', 'c' }, };
 
-
-	
 	public static void discoveryLab(char[][] enterMatrix) {
 		char[][] matrixLab = enterMatrix;
 		for (int x = 0; x < matrixLab.length; x++) {
@@ -108,7 +103,7 @@ public class AreasInMatrix {
 				char curent = matrixLab[x][y];
 				if (matrixLab[x][y] != ' ') {
 					findArea(matrixLab, x, y);
-					listAreas.add(new Area(curent,x, y, count));
+					listAreas.add(new Area(curent, x, y, count));
 					count = 0;
 				}
 			}

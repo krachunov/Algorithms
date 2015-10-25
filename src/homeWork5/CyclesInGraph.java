@@ -1,26 +1,25 @@
 /**
- * Problem 1.	Distance between Vertices
-We are given a directed graph consisting of N vertices and M edges.
-We are given also a set of pairs of vertices. Find the shortest distance between each pair of vertices or -1 if there is no path connecting them.
-There are no specified requirements for the input and output, so you may hardcode the input and output values.
-
+ * Problem 3 Cycles in a Graph
+Write a program to check whether an undirected graph is acyclic or holds any cycles.
  */
 
 package homeWork5;
 
 import java.util.ArrayList;
-
+import java.util.HashSet;
 import java.util.List;
-
+import java.util.Set;
 
 public class CyclesInGraph {
 	private List<List<Integer>> allNode;
+	private Set<Integer> everySingleNode;
 	private List<Boolean> viewNode;
 	int count = 0;
 
 	public CyclesInGraph(int numberofNode) {
 		setAllNode(new ArrayList<List<Integer>>());
 		setViewNode(new ArrayList<Boolean>());
+		setEverySingleNode(new HashSet<Integer>());
 		for (int i = 0; i <= numberofNode; i++) {
 			getAllNode().add(new ArrayList<Integer>());
 			getViewNode().add(false);
@@ -34,32 +33,37 @@ public class CyclesInGraph {
 		if (childs.length > 0) {
 			for (int child : childs) {
 				getAllNode().get(parent).add(child);
+				if (!getEverySingleNode().contains(childs)) {
+					getEverySingleNode().add(child);
+				}
 			}
 		}
 	}
 
 	// recursive method
-	private void distanceBetweenRecursive(int counter, int start, int end) {
-		getViewNode().set(start, true);
-		if (start == end) {
-			System.out.println(counter);
+	private void DFS(int start) {
+		if (getViewNode().get(start) == true) {
+			System.out.println("Acyclic: No");
 			return;
 		}
+		getViewNode().set(start, true);
 		List<Integer> currentNode = getAllNode().get(start);
 		for (Integer child : currentNode) {
 			if (getViewNode().get(child) != true) {
-				distanceBetweenRecursive(counter + 1, child, end);
-				getViewNode().set(child, false);
+				DFS(child);
+				// getViewNode().set(child, false);
 			}
 
 		}
 		return;
 	}
 
-	public void distanceBetweenRecursive(int start, int end) {
-		setCount(0);
-//		getViewNode().clear();
-		distanceBetweenRecursive(getCount(), start, end);
+	public void checkIsCycles() {
+		for (Integer node : getEverySingleNode()) {
+			if (getViewNode().get(node) != true) {
+				DFS(node);
+			}
+		}
 	}
 
 	public List<List<Integer>> getAllNode() {
@@ -68,6 +72,14 @@ public class CyclesInGraph {
 
 	public void setAllNode(List<List<Integer>> allNode) {
 		this.allNode = allNode;
+	}
+
+	public Set<Integer> getEverySingleNode() {
+		return everySingleNode;
+	}
+
+	public void setEverySingleNode(Set<Integer> everySingleNode) {
+		this.everySingleNode = everySingleNode;
 	}
 
 	public List<Boolean> getViewNode() {
@@ -87,9 +99,9 @@ public class CyclesInGraph {
 	}
 
 	public static void main(String[] args) {
-		DistanceBetweenVertices graph = new DistanceBetweenVertices(8);
+		CyclesInGraph graph = new CyclesInGraph(8);
 		graph.addChild(1, 4);
-		graph.addChild(2, 4);
+		graph.addChild(4, 1);
 		graph.addChild(3, 4, 5);
 		graph.addChild(4, 6);
 		graph.addChild(5, 3, 7, 8);
@@ -98,13 +110,7 @@ public class CyclesInGraph {
 		graph.addChild(8);
 		System.out.println();
 
-		graph.distanceBetweenRecursive(1, 6);
-		System.out.println("--------------------");
-		graph.distanceBetweenRecursive(1, 5);
-		System.out.println("--------------------");
-		graph.distanceBetweenRecursive(5, 6);
-		System.out.println("--------------------");
-		graph.distanceBetweenRecursive(5, 8);
+		graph.checkIsCycles();
 
 	}
 }

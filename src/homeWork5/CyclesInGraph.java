@@ -9,15 +9,16 @@ There are no specified requirements for the input and output, so you may hardcod
 package homeWork5;
 
 import java.util.ArrayList;
+
 import java.util.List;
 
 
-public class DistanceBetweenVertices {
+public class CyclesInGraph {
 	private List<List<Integer>> allNode;
 	private List<Boolean> viewNode;
 	int count = 0;
 
-	public DistanceBetweenVertices(int numberofNode) {
+	public CyclesInGraph(int numberofNode) {
 		setAllNode(new ArrayList<List<Integer>>());
 		setViewNode(new ArrayList<Boolean>());
 		for (int i = 0; i <= numberofNode; i++) {

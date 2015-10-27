@@ -6,13 +6,12 @@ public class Edge<T> implements Comparable<Edge> {
 	private int wightl;
 	private boolean connected;
 
-	public Edge(T startNode, T endNode, int wightl, String connected) {
+	public Edge(T startNode, T endNode, int wightl, boolean connected) {
 		setStartNode(startNode);
 		setEndNode(endNode);
 		setWightl(wightl);
-		if (connected.contains(connected)) {
-			setConnected(true);
-		}
+		setConnected(connected);
+
 	}
 
 	public Edge(T startNode, T endNode, int wightl) {

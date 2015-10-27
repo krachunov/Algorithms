@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.TreeMap;
 
 public class ExtendCableNetwork {
 
@@ -19,39 +20,58 @@ public class ExtendCableNetwork {
 		int firstNode;
 		int secondNode;
 		int wightl;
+		String connected = "connected";
 		List<Edge> edge = new ArrayList<Edge>();
+
 		for (int i = 0; i < numberOfEdge; i++) {
+			System.out.println("Enter");
 			String[] line = sc.nextLine().split(" ");
 			firstNode = Integer.valueOf(line[0]);
 			secondNode = Integer.valueOf(line[1]);
-			wightl = (line.length >= 2 ? Integer.valueOf(line[1]) : -1);
-			edge.add(new Edge<Integer>(firstNode, secondNode, wightl));
+			wightl = Integer.valueOf(line[2]);
+			if (line.length > 3) {
+				if (connected.contains(line[3])) {
+					edge.add(new Edge<Integer>(firstNode, secondNode, wightl,
+							true));
+				}
+			} else {
+				edge.add(new Edge<Integer>(firstNode, secondNode, wightl));
+			}
 
-			//TODO crate graph
+			// TODO crate graph
 		}
 
+		return edge;
+	}
+
+	static Map<Integer, List<Edge>> buildGraph(List<Edge> edges) {
+		Map<Integer, List<Edge>> graph = new TreeMap<>();
+		for (Edge edge : edges) {
+			if (!graph.containsKey(edge.getStartNode())) {
+				graph.put((Integer) edge.getStartNode(), new ArrayList<Edge>());
+			}
+			graph.get(edge.getStartNode()).add(edge);
+			if (!graph.containsKey(edge.getEndNode())) {
+				graph.put((Integer) edge.getEndNode(), new ArrayList<Edge>());
+			}
+			graph.get(edge.getEndNode()).add(edge);
+			//TODO - 1:14
+		}
 		return null;
 	}
 
-	static Map<Integer, List<Edge>> buildGraph() {
+	private static void prim(List<Edge> graph) {
+		MyBinaryHeaps priorityQueue = new MyBinaryHeaps<>();
 
-		return null;
 	}
 
 	public static void main(String[] args) {
 
-		List<Edge> edges = new ArrayList<Edge>();
-		edges.add(new Edge<Integer>(1, 1, 3));
-
-		MyBinaryHeaps graph = new MyBinaryHeaps();
-		graph.enqueue(new Edge<Integer>(1, 1, 5));
-		graph.enqueue(new Edge<Integer>(1, 2, 3));
-		graph.enqueue(new Edge<Integer>(2, 3, 1));
-		graph.enqueue(new Edge<Integer>(4, 5, 32));
-
-		while (graph.isEmpty()) {
-			System.out.println(graph.dequeue().toString());
-		}
+		List<Edge<Integer>> edges = new ArrayList<>();
+		edges.add(new Edge<Integer>(1, 4, 8));
+		edges.add(new Edge<Integer>(4, 0, 6, true));
+		edges.add(new Edge<Integer>(1, 7, 7));
+		edges.add(new Edge<Integer>(4, 4, 10));
 
 	}
 }

@@ -1,12 +1,12 @@
 package homeWork6;
 
-public class Edge<T> implements Comparable<Edge> {
-	private T startNode;
-	private T endNode;
+public class Edge implements Comparable<Edge> {
+	private int startNode;
+	private int endNode;
 	private int wightl;
 	private boolean connected;
 
-	public Edge(T startNode, T endNode, int wightl, boolean connected) {
+	public Edge(int startNode, int endNode, int wightl, boolean connected) {
 		setStartNode(startNode);
 		setEndNode(endNode);
 		setWightl(wightl);
@@ -14,26 +14,26 @@ public class Edge<T> implements Comparable<Edge> {
 
 	}
 
-	public Edge(T startNode, T endNode, int wightl) {
+	public Edge(int startNode, int endNode, int wightl) {
 		setStartNode(startNode);
 		setEndNode(endNode);
 		setWightl(wightl);
 		setConnected(false);
 	}
 
-	public T getStartNode() {
+	public int getStartNode() {
 		return startNode;
 	}
 
-	public void setStartNode(T startNode) {
+	public void setStartNode(int startNode) {
 		this.startNode = startNode;
 	}
 
-	public T getEndNode() {
+	public int getEndNode() {
 		return endNode;
 	}
 
-	public void setEndNode(T endNode) {
+	public void setEndNode(int endNode) {
 		this.endNode = endNode;
 	}
 

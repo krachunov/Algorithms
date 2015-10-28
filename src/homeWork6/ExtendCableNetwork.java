@@ -97,6 +97,17 @@ public class ExtendCableNetwork {
 			if (getSpanningTree().containsKey(smallestEdge.getStartNode())
 					^ getSpanningTree().containsKey(smallestEdge.getEndNode())) {
 				getSpaningTreeEdge().add(smallestEdge);
+
+				int nonTreeNode = (getSpanningTree().containsKey(
+						smallestEdge.getStartNode()) ? smallestEdge
+						.getEndNode() : smallestEdge.getStartNode());
+				getSpanningTree().put(nonTreeNode, null);
+
+				childEdge = graph.get(nonTreeNode);
+				for (int i = 0; i < childEdge.size(); i++) {
+					priorityQueue.enqueue(childEdge.get(i));
+				}
+
 			}
 		}
 	}
@@ -148,7 +159,8 @@ public class ExtendCableNetwork {
 
 		// for (java.util.Map.Entry<Integer, List<Edge>> entry : exCabNet
 		// .getSpanningTree().entrySet()) {
-		 System.out.println(exCabNet.getSpaningTreeEdge());
+
+		System.out.println(exCabNet.getSpaningTreeEdge());
 		// }
 	}
 }

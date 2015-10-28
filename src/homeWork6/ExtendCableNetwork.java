@@ -75,6 +75,7 @@ public class ExtendCableNetwork {
 	}
 
 	public void prim() {
+		// check every node
 		for (Edge edge : getEdges()) {
 			if (!getSpanningTree().containsKey(edge.getStartNode())) {
 				prim(edge.getStartNode());
@@ -85,24 +86,27 @@ public class ExtendCableNetwork {
 	private void prim(int startNode) {
 		MyBinaryHeaps<Edge> priorityQueue = new MyBinaryHeaps<>();
 
+		// add children edge from starting node to the queue
 		List<Edge> childEdge = graph.get(startNode);
 		for (int i = 0; i < childEdge.size(); i++) {
 			priorityQueue.enqueue(childEdge.get(i));
 		}
+		// add nod in to spanning tree
 		getSpanningTree().put(startNode, null);
-		// TODO
+
 		while (priorityQueue.getCount() > 0) {
 
 			Edge smallestEdge = priorityQueue.extractMin();
+			// check whether one of the two nodes in the spaning tree
 			if (getSpanningTree().containsKey(smallestEdge.getStartNode())
 					^ getSpanningTree().containsKey(smallestEdge.getEndNode())) {
 				getSpaningTreeEdge().add(smallestEdge);
-
+				// then take that which is not in the tree and add it
 				int nonTreeNode = (getSpanningTree().containsKey(
 						smallestEdge.getStartNode()) ? smallestEdge
 						.getEndNode() : smallestEdge.getStartNode());
 				getSpanningTree().put(nonTreeNode, null);
-
+				// then shoved his children edges
 				childEdge = graph.get(nonTreeNode);
 				for (int i = 0; i < childEdge.size(); i++) {
 					priorityQueue.enqueue(childEdge.get(i));

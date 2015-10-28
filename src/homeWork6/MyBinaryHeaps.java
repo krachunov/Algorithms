@@ -210,7 +210,7 @@ public class MyBinaryHeaps<T extends Comparable<T>> implements Comparator<T> {
 	}
 
 	public boolean isEmpty() {
-		return arr.length != 0;
+		return arr.length == 0;
 	}
 
 	/**

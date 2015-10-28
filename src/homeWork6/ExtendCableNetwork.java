@@ -7,11 +7,14 @@ along with the estimated connection costs between some pairs of customers and pr
  */
 package homeWork6;
 
+import java.io.ObjectInputStream.GetField;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.TreeMap;
+
+import javax.swing.RowFilter.Entry;
 
 @SuppressWarnings("rawtypes")
 public class ExtendCableNetwork {
@@ -76,20 +79,31 @@ public class ExtendCableNetwork {
 		}
 	}
 
-	@SuppressWarnings({ "unchecked", "unused" })
+	@SuppressWarnings({ "unchecked" })
 	private void prim(int startNode) {
-		// add a node to the spanning tree
-		getSpanningTree().put(startNode, getGraph().get(startNode));
-		// set the node connected
-		getGraph().get(startNode).get(startNode).setConnected(true);
 		MyBinaryHeaps priorityQueue = new MyBinaryHeaps<>();
+
+		// add a node to the spanning tree
+		getSpanningTree().put(startNode, new ArrayList<Edge>());
+		// getSpanningTree().put(startNode, getGraph().get(startNode));
+
 		// add all child edges in to queue
 		List<Edge> temp = graph.get(startNode);
 		for (int i = 0; i < temp.size(); i++) {
 			priorityQueue.enqueue(temp.get(i));
 		}
-		while (priorityQueue.isEmpty()) {
+		while (!priorityQueue.isEmpty()) {
 			Edge smallestEdge = (Edge) priorityQueue.extractMin();
+			smallestEdge.setConnected(true);
+			int x = smallestEdge.getEndNode();
+			List<Edge> childEdges = getGraph().get(x);
+			for (Edge edge : childEdges) {
+				if (!edge.isConnected()) {
+					priorityQueue.enqueue(edge);
+				}
+			}
+			getSpanningTree().put(smallestEdge.getEndNode(),
+					new ArrayList<Edge>());
 			System.out.println(smallestEdge.toString());
 		}
 	}
@@ -130,5 +144,10 @@ public class ExtendCableNetwork {
 		exCabNet.buildGraph(exCabNet.getEdges());
 		exCabNet.prim();
 		System.out.println("d");
+		
+//		for (java.util.Map.Entry<Integer, List<Edge>> entry : exCabNet
+//				.getSpanningTree().entrySet()) {
+//			System.out.println(entry);
+//		}
 	}
 }

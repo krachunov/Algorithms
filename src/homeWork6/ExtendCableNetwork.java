@@ -24,7 +24,8 @@ public class ExtendCableNetwork {
 		List<Edge> edge = new ArrayList<Edge>();
 
 		for (int i = 0; i < numberOfEdge; i++) {
-			System.out.println("Enter");
+			System.out
+					.println("Enter the fisrt node/second node and the price");
 			String[] line = sc.nextLine().split(" ");
 			firstNode = Integer.valueOf(line[0]);
 			secondNode = Integer.valueOf(line[1]);
@@ -55,9 +56,9 @@ public class ExtendCableNetwork {
 				graph.put((Integer) edge.getEndNode(), new ArrayList<Edge>());
 			}
 			graph.get(edge.getEndNode()).add(edge);
-			//TODO - 1:14
+			// TODO - 1:14
 		}
-		return null;
+		return graph;
 	}
 
 	private static void prim(List<Edge> graph) {
@@ -66,12 +67,13 @@ public class ExtendCableNetwork {
 	}
 
 	public static void main(String[] args) {
-
-		List<Edge<Integer>> edges = new ArrayList<>();
-		edges.add(new Edge<Integer>(1, 4, 8));
-		edges.add(new Edge<Integer>(4, 0, 6, true));
-		edges.add(new Edge<Integer>(1, 7, 7));
-		edges.add(new Edge<Integer>(4, 4, 10));
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Enter the number of edge");
+		List<Edge> edges = createEdge(sc.nextInt());
+		Map<Integer, List<Edge>> graph = buildGraph(edges);
+		
+		System.out.println(graph.size());
+		
 
 	}
 }

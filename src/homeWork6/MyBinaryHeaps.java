@@ -172,7 +172,7 @@ public class MyBinaryHeaps<T extends Comparable<T>> implements Comparator<T> {
 	}
 
 	@SuppressWarnings("unchecked")
-	public T dequeue() {
+	public T extractMin() {
 		if (getCount() == 0) {
 			throw new IllegalArgumentException("The queue is empty");
 		}

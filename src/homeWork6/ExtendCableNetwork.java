@@ -24,6 +24,7 @@ public class ExtendCableNetwork {
 	Map<Integer, List<Edge>> graph;
 	Map<Integer, List<Edge>> spanningTreeNode;
 	List<Edge> spaningTreeEdge;
+	int budget;
 
 	public ExtendCableNetwork() {
 		spanningTreeNode = new HashMap<Integer, List<Edge>>();
@@ -77,7 +78,7 @@ public class ExtendCableNetwork {
 	public void prim() {
 		// check every node
 		for (Edge edge : getEdges()) {
-			if (!getSpanningTree().containsKey(edge.getStartNode())) {
+			if (!getSpanningTreeNode().containsKey(edge.getStartNode())) {
 				prim(edge.getStartNode());
 			}
 		}
@@ -89,27 +90,41 @@ public class ExtendCableNetwork {
 		// add children edge from starting node to the queue
 		List<Edge> childEdge = graph.get(startNode);
 		for (int i = 0; i < childEdge.size(); i++) {
-			priorityQueue.enqueue(childEdge.get(i));
+			if (childEdge.get(i).isConnected() != true) {
+				priorityQueue.enqueue(childEdge.get(i));
+			}
 		}
 		// add nod in to spanning tree
-		getSpanningTree().put(startNode, null);
+		getSpanningTreeNode().put(startNode, null);
 
 		while (priorityQueue.getCount() > 0) {
 
 			Edge smallestEdge = priorityQueue.extractMin();
 			// check whether one of the two nodes in the spaning tree
-			if (getSpanningTree().containsKey(smallestEdge.getStartNode())
-					^ getSpanningTree().containsKey(smallestEdge.getEndNode())) {
-				getSpaningTreeEdge().add(smallestEdge);
+			if (getSpanningTreeNode().containsKey(smallestEdge.getStartNode())
+					^ getSpanningTreeNode().containsKey(smallestEdge.getEndNode())) {
+
+				if ((getBudget() - smallestEdge.getWightl() >= 0)) {
+					int tempBudget = getBudget() - smallestEdge.getWightl();
+					setBudget(tempBudget);
+					getSpaningTreeEdge().add(smallestEdge);
+					smallestEdge.setConnected(true);
+				
+				}
+
 				// then take that which is not in the tree and add it
-				int nonTreeNode = (getSpanningTree().containsKey(
-						smallestEdge.getStartNode()) ? smallestEdge
-						.getEndNode() : smallestEdge.getStartNode());
-				getSpanningTree().put(nonTreeNode, null);
+				int nonTreeNode = (getSpanningTreeNode().containsKey(smallestEdge.getStartNode()) ? 
+						smallestEdge.getEndNode() :
+							smallestEdge.getStartNode());
+				
+				
+				getSpanningTreeNode().put(nonTreeNode, null);
 				// then shoved his children edges
 				childEdge = graph.get(nonTreeNode);
 				for (int i = 0; i < childEdge.size(); i++) {
-					priorityQueue.enqueue(childEdge.get(i));
+					if (childEdge.get(i).isConnected() != true) {
+						priorityQueue.enqueue(childEdge.get(i));
+					}
 				}
 
 			}
@@ -132,11 +147,11 @@ public class ExtendCableNetwork {
 		this.graph = graph;
 	}
 
-	public Map<Integer, List<Edge>> getSpanningTree() {
+	public Map<Integer, List<Edge>> getSpanningTreeNode() {
 		return spanningTreeNode;
 	}
 
-	public void setSpanningTree(Map<Integer, List<Edge>> spanningTree) {
+	public void setSpanningTreeNode(Map<Integer, List<Edge>> spanningTree) {
 		this.spanningTreeNode = spanningTree;
 	}
 
@@ -148,19 +163,30 @@ public class ExtendCableNetwork {
 		this.spaningTreeEdge = spaningTreeEdge;
 	}
 
+	public int getBudget() {
+		return budget;
+	}
+
+	public void setBudget(int budget) {
+		this.budget = budget;
+	}
+
 	public static void main(String[] args) {
 
 		Scanner sc = new Scanner(System.in);
 
 		ExtendCableNetwork exCabNet = new ExtendCableNetwork();
-
+		System.out.println("Enter the budget");
+		int budgetLimit = sc.nextInt();
+		exCabNet.setBudget(budgetLimit);
 		System.out.println("Enter the number of edge");
 		exCabNet.createEdge((sc.nextInt()));
-		sc.close();
+
 		exCabNet.buildGraph(exCabNet.getEdges());
+
 		exCabNet.prim();
 		System.out.println("");
-
+		sc.close();
 		// for (java.util.Map.Entry<Integer, List<Edge>> entry : exCabNet
 		// .getSpanningTree().entrySet()) {
 

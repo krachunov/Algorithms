@@ -63,7 +63,7 @@ public class Edge implements Comparable<Edge> {
 	@Override
 	public String toString() {
 		return "(" + this.getStartNode() + " " + this.getEndNode() + ")-> "
-				+ this.getWightl();
+				+ this.getWightl() + " connected: " + isConnected();
 
 	}
 }

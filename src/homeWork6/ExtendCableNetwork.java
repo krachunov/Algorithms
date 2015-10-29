@@ -7,7 +7,6 @@ along with the estimated connection costs between some pairs of customers and pr
  */
 package homeWork6;
 
-import java.io.ObjectInputStream.GetField;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -15,9 +14,6 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.TreeMap;
 
-import javax.swing.RowFilter.Entry;
-
-@SuppressWarnings("rawtypes")
 public class ExtendCableNetwork {
 
 	List<Edge> edges;
@@ -102,23 +98,24 @@ public class ExtendCableNetwork {
 			Edge smallestEdge = priorityQueue.extractMin();
 			// check whether one of the two nodes in the spaning tree
 			if (getSpanningTreeNode().containsKey(smallestEdge.getStartNode())
-					^ getSpanningTreeNode().containsKey(smallestEdge.getEndNode())) {
+					^ getSpanningTreeNode().containsKey(
+							smallestEdge.getEndNode())) {
 
 				if ((getBudget() - smallestEdge.getWightl() >= 0)) {
 					int tempBudget = getBudget() - smallestEdge.getWightl();
 					setBudget(tempBudget);
 					getSpaningTreeEdge().add(smallestEdge);
 					smallestEdge.setConnected(true);
-				
+
 				}
 
 				// then take that which is not in the tree and add it
-				int nonTreeNode = (getSpanningTreeNode().containsKey(smallestEdge.getStartNode()) ? 
-						smallestEdge.getEndNode() :
-							smallestEdge.getStartNode());
-				
-				
+				int nonTreeNode = (getSpanningTreeNode().containsKey(
+						smallestEdge.getStartNode()) ? smallestEdge
+						.getEndNode() : smallestEdge.getStartNode());
+
 				getSpanningTreeNode().put(nonTreeNode, null);
+
 				// then shoved his children edges
 				childEdge = graph.get(nonTreeNode);
 				for (int i = 0; i < childEdge.size(); i++) {

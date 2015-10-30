@@ -66,7 +66,7 @@ public class ExtendCableNetwork {
 				graph.put((Integer) edge.getEndNode(), new ArrayList<Edge>());
 			}
 			graph.get(edge.getEndNode()).add(edge);
-			//TODO
+			// TODO
 		}
 
 		setGraph(graph);
@@ -97,7 +97,7 @@ public class ExtendCableNetwork {
 		while (priorityQueue.getCount() > 0) {
 
 			Edge smallestEdge = priorityQueue.extractMin();
-			// check whether one of the two nodes in the spaning tree
+			// check whether one of the two nodes in the spanning tree
 			if (getSpanningTreeNode().containsKey(smallestEdge.getStartNode())
 					^ getSpanningTreeNode().containsKey(
 							smallestEdge.getEndNode())) {

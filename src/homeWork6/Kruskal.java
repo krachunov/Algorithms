@@ -1,3 +1,10 @@
+/**
+ * Problem 2. Modified Kruskal Algorithm
+Implement Kruskal’s algorithm by keeping the disjoint sets in a forest where each node holds a parent + children.
+ Thus, when two sets need to be merged, the result can be easily optimized to have two levels only: root and leaves. 
+ When two trees are merged, all nodes from the second (its root + root’s children) should be attached to the first tree’s root node:
+ */
+
 package homeWork6;
 
 import homeWork1.Area;
@@ -7,7 +14,6 @@ import java.util.Comparator;
 import java.util.List;
 
 public class Kruskal {
-	static int n = 9;
 
 	public static void main(String[] args) {
 		List<Edge> edges = new ArrayList<>();
@@ -47,14 +53,14 @@ public class Kruskal {
 		edges3.add(new Edge(5, 3, 2));
 		edges3.add(new Edge(3, 2, 14));
 
-		List<Edge> minimumSpaningForest = kruskalAlgorithm(n, edges3);
+		List<Edge> minimumSpaningForest = kruskalAlgorithm(edges);
 		for (Edge edge : minimumSpaningForest) {
 			System.out.println(edge);
 		}
 
 	}
 
-	static List<Edge> kruskalAlgorithm(int n2, List<Edge> edges) {
+	static List<Edge> kruskalAlgorithm(List<Edge> edges) {
 		edges.sort(new Comparator<Edge>() {
 			@Override
 			public int compare(Edge o1, Edge o2) {
@@ -68,8 +74,8 @@ public class Kruskal {
 			}
 		});
 
-		int[] parent = new int[n];
-		for (int i = 0; i < n; i++) {
+		int[] parent = new int[edges.size()];
+		for (int i = 0; i < edges.size(); i++) {
 			parent[i] = i;
 		}
 		List<Edge> spaningTree = new ArrayList<Edge>();

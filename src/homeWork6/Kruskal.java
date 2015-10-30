@@ -23,10 +23,34 @@ public class Kruskal {
 		edges.add(new Edge(4, 7, 10));
 		edges.add(new Edge(6, 8, 7));
 
-		List<Edge> minimumSpaningForest = kruskalAlgorithm(n, edges);
-	for (Edge edge : minimumSpaningForest) {
-		System.out.println(edge);
-	}
+		List<Edge> edges2 = new ArrayList<>();
+		edges2.add(new Edge(0, 1, 9));
+		edges2.add(new Edge(0, 3, 4));
+		edges2.add(new Edge(3, 1, 6));
+		edges2.add(new Edge(3, 2, 11));
+		edges2.add(new Edge(1, 2, 5));
+
+		List<Edge> edges3 = new ArrayList<>();
+		edges3.add(new Edge(1, 4, 8));
+		edges3.add(new Edge(4, 0, 6));
+		edges3.add(new Edge(1, 7, 7));
+		edges3.add(new Edge(4, 7, 10));
+		edges3.add(new Edge(4, 8, 3));
+		edges3.add(new Edge(7, 8, 4));
+		edges3.add(new Edge(0, 8, 5));
+		edges3.add(new Edge(8, 6, 9));
+		edges3.add(new Edge(8, 3, 20));
+		edges3.add(new Edge(0, 5, 4));
+		edges3.add(new Edge(0, 3, 9));
+		edges3.add(new Edge(6, 3, 8));
+		edges3.add(new Edge(6, 2, 12));
+		edges3.add(new Edge(5, 3, 2));
+		edges3.add(new Edge(3, 2, 14));
+
+		List<Edge> minimumSpaningForest = kruskalAlgorithm(n, edges3);
+		for (Edge edge : minimumSpaningForest) {
+			System.out.println(edge);
+		}
 
 	}
 

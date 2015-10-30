@@ -107,7 +107,6 @@ public class ExtendCableNetwork {
 					setBudget(tempBudget);
 					getSpaningTreeEdge().add(smallestEdge);
 					smallestEdge.setConnected(true);
-
 				}
 
 				// then take that which is not in the tree and add it

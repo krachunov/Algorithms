@@ -46,18 +46,19 @@ public class MostReliablePath {
 			@Override
 			public int compare(Edge o1, Edge o2) {
 				if (o1.getWightl() > o2.getWightl()) {
-					return -1;
-				} else if (o1.getWightl() < o2.getWightl()) {
 					return 1;
+				} else if (o1.getWightl() < o2.getWightl()) {
+					return -1;
 				} else {
 					return 0;
 				}
 			}
 		});
 
-		
-		int[] reliable = new int[edges.size()];
-	
+		int[] parent = new int[edges.size()];
+		for (int i = 0; i < edges.size(); i++) {
+			parent[i] = i;
+		}
 		List<Edge> spaningTree = new ArrayList<Edge>();
 		for (Edge edge : edges) {
 			int rootStartNode = findRoot(edge.getStartNode(), parent);

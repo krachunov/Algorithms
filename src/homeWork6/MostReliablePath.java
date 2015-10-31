@@ -84,9 +84,14 @@ public class MostReliablePath {
 			Edge currentEdge = priorityQueue.extractMin();
 			if (!visitedNode[currentEdge.getEndNode()]) {
 				visitedNode[currentEdge.getEndNode()] = true;
-				
-				if(distance[currentEdge.getEndNode()]>currentEdge.getWightl()){
-					distance[currentEdge.getEndNode()]=currentEdge.getWightl();
+
+				if (distance[currentEdge.getEndNode()] > currentEdge
+						.getWightl()) {
+					distance[currentEdge.getEndNode()] = currentEdge
+							.getWightl();
+					// TODO distance = distance current node + distance from
+					// parentNode to the current node;
+
 				}
 			}
 

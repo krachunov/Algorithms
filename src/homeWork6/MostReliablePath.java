@@ -38,7 +38,7 @@ public class MostReliablePath {
 		edges2.add(new Edge(2, 3, 99));
 		edges2.add(new Edge(1, 3, 98));
 
-		List<Edge> minimumSpaningForest = reliablePath(edges, 0);
+		List<Edge> minimumSpaningForest = reliablePath(edges2, 0);
 
 		for (Edge edge : minimumSpaningForest) {
 			System.out.println(edge);
@@ -68,12 +68,14 @@ public class MostReliablePath {
 		Map<Integer, List<Edge>> graph = buildGraph(edges);
 		MyBinaryHeaps<Edge> priorityQueue = new MyBinaryHeaps<>();
 
-		boolean[] visitedNode = new boolean[edges.size()];
-		int[] distance = new int[edges.size()];
+		boolean[] visitedNode = new boolean[graph.size()];
+		int[] parent = new int[graph.size()];
+		int[] distance = new int[graph.size()];
 		for (int i = 0; i < distance.length; i++) {
 			distance[i] = Integer.MAX_VALUE;
 		}
 		visitedNode[startingNode] = true;
+		parent[startingNode] = startingNode;
 		distance[startingNode] = 0;
 
 		do {
@@ -82,8 +84,13 @@ public class MostReliablePath {
 				priorityQueue.enqueue(edge);
 			}
 			Edge currentEdge = priorityQueue.extractMin();
+			int parentNode = currentEdge.getStartNode();
+			
 			if (!visitedNode[currentEdge.getEndNode()]) {
+				// set node is visited
 				visitedNode[currentEdge.getEndNode()] = true;
+				// set previously node
+				parent[currentEdge.getEndNode()] = currentEdge.getStartNode();
 
 				if (distance[currentEdge.getEndNode()] > currentEdge
 						.getWightl()) {
@@ -93,6 +100,7 @@ public class MostReliablePath {
 					// parentNode to the current node;
 
 				}
+				startingNode=currentEdge.getEndNode();
 			}
 
 		} while (priorityQueue.getCount() > 0);

@@ -39,10 +39,10 @@ public class MostReliablePath {
 		edges2.add(new Edge(1, 3, 98));
 
 		List<Edge> minimumSpaningForest = reliablePath(edges2, 0);
-
-		for (Edge edge : minimumSpaningForest) {
-			System.out.println(edge);
-		}
+//
+//		for (Edge edge : minimumSpaningForest) {
+//			System.out.println(edge);
+//		}
 
 	}
 
@@ -73,6 +73,7 @@ public class MostReliablePath {
 		int[] distance = new int[graph.size()];
 		for (int i = 0; i < distance.length; i++) {
 			distance[i] = Integer.MAX_VALUE;
+			parent[i] = -1;
 		}
 		visitedNode[startingNode] = true;
 		parent[startingNode] = startingNode;
@@ -81,14 +82,18 @@ public class MostReliablePath {
 		do {
 			List<Edge> childOfStartingtNode = graph.get(startingNode);
 			for (Edge edge : childOfStartingtNode) {
-				priorityQueue.enqueue(edge);
+				if (!edge.isConnected()) {
+					priorityQueue.enqueue(edge);
+					edge.setConnected(true);
+				}
 			}
 			Edge currentEdge = priorityQueue.extractMin();
 			int parentNode = currentEdge.getStartNode();
-			
+
 			if (!visitedNode[currentEdge.getEndNode()]) {
 				// set node is visited
 				visitedNode[currentEdge.getEndNode()] = true;
+				// currentEdge.setConnected(true); ??????????
 				// set previously node
 				parent[currentEdge.getEndNode()] = currentEdge.getStartNode();
 
@@ -100,7 +105,7 @@ public class MostReliablePath {
 					// parentNode to the current node;
 
 				}
-				startingNode=currentEdge.getEndNode();
+				startingNode = currentEdge.getEndNode();
 			}
 
 		} while (priorityQueue.getCount() > 0);

@@ -39,10 +39,10 @@ public class MostReliablePath {
 		edges2.add(new Edge(1, 3, 98));
 
 		List<Edge> minimumSpaningForest = reliablePath(edges2, 0);
-//
-//		for (Edge edge : minimumSpaningForest) {
-//			System.out.println(edge);
-//		}
+		//
+		// for (Edge edge : minimumSpaningForest) {
+		// System.out.println(edge);
+		// }
 
 	}
 
@@ -97,10 +97,10 @@ public class MostReliablePath {
 				// set previously node
 				parent[currentEdge.getEndNode()] = currentEdge.getStartNode();
 
-				if (distance[currentEdge.getEndNode()] > currentEdge
-						.getWightl()) {
-					distance[currentEdge.getEndNode()] = currentEdge
-							.getWightl();
+				if (distance[currentEdge.getEndNode()] > (distance[currentEdge
+						.getStartNode()] + currentEdge.getWightl())) {
+					int newDistance = distance[currentEdge.getStartNode()] + currentEdge.getWightl();
+					distance[currentEdge.getEndNode()] = newDistance;
 					// TODO distance = distance current node + distance from
 					// parentNode to the current node;
 
@@ -109,7 +109,11 @@ public class MostReliablePath {
 			}
 
 		} while (priorityQueue.getCount() > 0);
-
+		for (int i = 0; i < graph.size(); i++) {
+			System.out.println("distance: "+distance[i]);
+			System.out.println("Parent: "+parent[i]);
+			System.out.println();
+		}
 		return null;
 	}
 }

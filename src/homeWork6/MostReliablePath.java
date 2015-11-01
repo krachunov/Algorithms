@@ -40,13 +40,13 @@ public class MostReliablePath {
 		edges2.add(new Edge(1, 3, 98));
 
 		List<Edge> edges3 = new ArrayList<>();
-		edges3.add(new Edge(0, 1, 100));
-		edges3.add(new Edge(0, 2, 1));
-		edges3.add(new Edge(2, 3, 1));
-		edges3.add(new Edge(3, 1, 1));
+		edges3.add(new Edge(0, 2, 10));
+		edges3.add(new Edge(0, 1, 12));
+//		edges3.add(new Edge(1, 2, 10));
+		edges3.add(new Edge(1, 3, 3));
+		edges3.add(new Edge(2, 3, 6));
 
-		dijkstra(edges, 0);
-		PriorityQueue<Edge> g = new PriorityQueue<Edge>();
+		dijkstra(edges3, 0);
 
 	}
 
@@ -61,7 +61,8 @@ public class MostReliablePath {
 			if (!graph.containsKey(edge.getEndNode())) {
 				graph.put((Integer) edge.getEndNode(), new ArrayList<Edge>());
 			}
-			graph.get(edge.getEndNode()).add(edge);
+			Edge reversedEdge = new Edge(edge.getEndNode(), edge.getStartNode(), edge.getWightl());
+			graph.get(edge.getEndNode()).add(reversedEdge);
 		}
 
 		return graph;
@@ -71,8 +72,7 @@ public class MostReliablePath {
 
 		Map<Integer, List<Edge>> graph = buildGraph(edges);
 		// use reverse order priority queue
-		PriorityQueue<Edge> priorityQueue = new PriorityQueue<Edge>(
-				(Collections.reverseOrder()));
+		PriorityQueue<Edge> priorityQueue = new PriorityQueue<Edge>();
 
 		boolean[] visitedNode = new boolean[graph.size()];
 		int[] parent = new int[graph.size()];
@@ -87,24 +87,25 @@ public class MostReliablePath {
 		distance[startingNode] = 0;
 
 		do {
+			//TODO
 			List<Edge> childOfStartingtNode = graph.get(startingNode);
 			for (Edge edge : childOfStartingtNode) {
 				if (!edge.isConnected()) {
 
 					priorityQueue.add(edge);
-					edge.setConnected(true);
+				
 				}
 			}
 
 			Edge currentEdge = priorityQueue.poll();
+			currentEdge.setConnected(true);
 			if (!visitedNode[currentEdge.getEndNode()]) {
 				visitedNode[currentEdge.getEndNode()] = true;
 				parent[currentEdge.getEndNode()] = currentEdge.getStartNode();
 
-				if (distance[currentEdge.getEndNode()] > (distance[currentEdge
-						.getStartNode()] + currentEdge.getWightl())) {
-					int newDistance = distance[currentEdge.getStartNode()]
-							+ currentEdge.getWightl();
+				int newDistance = distance[currentEdge.getStartNode()]+ currentEdge.getWightl();
+
+				if (distance[currentEdge.getEndNode()] > newDistance) {
 					distance[currentEdge.getEndNode()] = newDistance;
 				}
 				startingNode = currentEdge.getEndNode();

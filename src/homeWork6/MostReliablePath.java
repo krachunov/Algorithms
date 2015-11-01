@@ -10,6 +10,7 @@ For example, let’s consider the graph below:
 package homeWork6;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
@@ -44,7 +45,7 @@ public class MostReliablePath {
 		edges3.add(new Edge(2, 3, 1));
 		edges3.add(new Edge(3, 1, 1));
 
-		dijkstra(edges3, 0);
+		dijkstra(edges, 0);
 		PriorityQueue<Edge> g = new PriorityQueue<Edge>();
 
 	}
@@ -69,12 +70,14 @@ public class MostReliablePath {
 	private static void dijkstra(List<Edge> edges, int startingNode) {
 
 		Map<Integer, List<Edge>> graph = buildGraph(edges);
-		MyBinaryHeaps<Edge> priorityQueue = new MyBinaryHeaps<>();
+		// use reverse order priority queue
+		PriorityQueue<Edge> priorityQueue = new PriorityQueue<Edge>(
+				(Collections.reverseOrder()));
 
 		boolean[] visitedNode = new boolean[graph.size()];
 		int[] parent = new int[graph.size()];
 		int[] distance = new int[graph.size()];
-		// initialize tha parent and distance array
+		// initialize the parent and distance array
 		for (int i = 0; i < distance.length; i++) {
 			distance[i] = Integer.MAX_VALUE;
 			parent[i] = -1;
@@ -87,17 +90,15 @@ public class MostReliablePath {
 			List<Edge> childOfStartingtNode = graph.get(startingNode);
 			for (Edge edge : childOfStartingtNode) {
 				if (!edge.isConnected()) {
-					priorityQueue.enqueue(edge);
+
+					priorityQueue.add(edge);
 					edge.setConnected(true);
 				}
 			}
-			Edge currentEdge = priorityQueue.extractMin();
 
+			Edge currentEdge = priorityQueue.poll();
 			if (!visitedNode[currentEdge.getEndNode()]) {
-				// set node is visited
 				visitedNode[currentEdge.getEndNode()] = true;
-				// currentEdge.setConnected(true); ??????????
-				// set previously node
 				parent[currentEdge.getEndNode()] = currentEdge.getStartNode();
 
 				if (distance[currentEdge.getEndNode()] > (distance[currentEdge
@@ -105,12 +106,12 @@ public class MostReliablePath {
 					int newDistance = distance[currentEdge.getStartNode()]
 							+ currentEdge.getWightl();
 					distance[currentEdge.getEndNode()] = newDistance;
-
 				}
 				startingNode = currentEdge.getEndNode();
 			}
 
-		} while (priorityQueue.getCount() > 0);
+		} while (priorityQueue.size() > 0);
+
 		for (int i = 0; i < graph.size(); i++) {
 			System.out.println("Node: " + i);
 			System.out.println("distance: " + distance[i]);

@@ -38,11 +38,14 @@ public class MostReliablePath {
 		edges2.add(new Edge(2, 3, 99));
 		edges2.add(new Edge(1, 3, 98));
 
-		List<Edge> minimumSpaningForest = reliablePath(edges2, 0);
-		//
-		// for (Edge edge : minimumSpaningForest) {
-		// System.out.println(edge);
-		// }
+		List<Edge> edges3 = new ArrayList<>();
+		edges3.add(new Edge(0, 1, 100));
+		edges3.add(new Edge(0, 2, 1));
+		edges3.add(new Edge(2, 3, 1));
+		edges3.add(new Edge(3, 1, 1));
+
+		dijkstra(edges3, 0);
+		PriorityQueue<Edge> g = new PriorityQueue<Edge>();
 
 	}
 
@@ -58,19 +61,20 @@ public class MostReliablePath {
 				graph.put((Integer) edge.getEndNode(), new ArrayList<Edge>());
 			}
 			graph.get(edge.getEndNode()).add(edge);
-			// TODO
 		}
 
 		return graph;
 	}
 
-	private static List<Edge> reliablePath(List<Edge> edges, int startingNode) {
+	private static void dijkstra(List<Edge> edges, int startingNode) {
+
 		Map<Integer, List<Edge>> graph = buildGraph(edges);
 		MyBinaryHeaps<Edge> priorityQueue = new MyBinaryHeaps<>();
 
 		boolean[] visitedNode = new boolean[graph.size()];
 		int[] parent = new int[graph.size()];
 		int[] distance = new int[graph.size()];
+		// initialize tha parent and distance array
 		for (int i = 0; i < distance.length; i++) {
 			distance[i] = Integer.MAX_VALUE;
 			parent[i] = -1;
@@ -88,7 +92,6 @@ public class MostReliablePath {
 				}
 			}
 			Edge currentEdge = priorityQueue.extractMin();
-			int parentNode = currentEdge.getStartNode();
 
 			if (!visitedNode[currentEdge.getEndNode()]) {
 				// set node is visited
@@ -99,10 +102,9 @@ public class MostReliablePath {
 
 				if (distance[currentEdge.getEndNode()] > (distance[currentEdge
 						.getStartNode()] + currentEdge.getWightl())) {
-					int newDistance = distance[currentEdge.getStartNode()] + currentEdge.getWightl();
+					int newDistance = distance[currentEdge.getStartNode()]
+							+ currentEdge.getWightl();
 					distance[currentEdge.getEndNode()] = newDistance;
-					// TODO distance = distance current node + distance from
-					// parentNode to the current node;
 
 				}
 				startingNode = currentEdge.getEndNode();
@@ -110,10 +112,10 @@ public class MostReliablePath {
 
 		} while (priorityQueue.getCount() > 0);
 		for (int i = 0; i < graph.size(); i++) {
-			System.out.println("distance: "+distance[i]);
-			System.out.println("Parent: "+parent[i]);
+			System.out.println("Node: " + i);
+			System.out.println("distance: " + distance[i]);
+			System.out.println("Parent: " + parent[i]);
 			System.out.println();
 		}
-		return null;
 	}
 }

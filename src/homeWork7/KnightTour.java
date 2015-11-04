@@ -11,43 +11,56 @@ e.g. cell (0, 0) will be 1, the first step, the next visited cell (0, 2) will ha
 package homeWork7;
 
 import java.util.List;
+import java.util.Scanner;
 
 public class KnightTour {
 
-	public static void findPath(int[][] matrix, int row, int col, int symbol) {
-		int snakeLength = 0;
+	public static void findPath(int[][] matrix, int row, int col, int count) {
+
 		// check if out of array
 		if (row < 0 || col < 0 || row >= matrix.length
 				|| col >= matrix[row].length) {
 			return;
 		}
 		// check is free
-		if (matrix[row][col] != ' ') {
+		if (matrix[row][col] != 0) {
 			return;
 		}
+		int currentCount = count;
+		currentCount++;
+		matrix[row][col] = currentCount;
 
-		if (snakeLength > 0) {
-			snakeLength--;
-			matrix[row][col] = 'x';
+		findPath(matrix, row + 1, col + 2, currentCount);
+		findPath(matrix, row - 1, col + 2, currentCount);
+		findPath(matrix, row - 1, col - 2, currentCount);
+		findPath(matrix, row + 1, col - 2, currentCount);
+		findPath(matrix, row - 2, col - 1, currentCount);
+		findPath(matrix, row - 2, col + 1, currentCount);
+		findPath(matrix, row + 2, col + 1, currentCount);
+		findPath(matrix, row + 2, col - 1, currentCount);
+		currentCount--;
 
-			findPath(matrix, row - 1, col - 2, 'R');
-			findPath(matrix, row - 1, col + 2, 'D');
-			findPath(matrix, row + 1, col + 2, 'D');
-			findPath(matrix, row + 1, col - 2, 'D');
-			findPath(matrix, row - 2, col - 1, 'D');
-			findPath(matrix, row - 2, col + 1, 'D');
-			findPath(matrix, row + 2, col + 1, 'D');
-			findPath(matrix, row + 2, col - 1, 'D');
-
-			snakeLength++;
-
-			matrix[row][col] = ' ';
-
-		}
 	}
 
 	public static void knightTour(int n) {
 		int[][] board = new int[n][n];
+		findPath(board, 0, 0, 0);
+		for (int row = 0; row < board.length; row++) {
+			System.out.println();
+			for (int col = 0; col < board[0].length; col++) {
+				System.out.print(board[row][col] + " ");
+			}
+		}
 
 	}
+
+	public static void main(String[] args) {
+		System.out.println("Enter the size of board");
+		Scanner sc = new Scanner(System.in);
+		int size = sc.nextInt();
+		knightTour(size);
+		sc.close();
+
+	}
+
 }

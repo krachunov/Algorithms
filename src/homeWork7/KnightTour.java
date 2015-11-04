@@ -32,12 +32,12 @@ public class KnightTour {
 
 		findPath(matrix, row + 1, col + 2, currentCount);
 		findPath(matrix, row - 1, col + 2, currentCount);
-		findPath(matrix, row - 1, col - 2, currentCount);
-		findPath(matrix, row + 1, col - 2, currentCount);
-		findPath(matrix, row - 2, col - 1, currentCount);
-		findPath(matrix, row - 2, col + 1, currentCount);
 		findPath(matrix, row + 2, col + 1, currentCount);
+		findPath(matrix, row + 1, col - 2, currentCount);
+		findPath(matrix, row - 1, col - 2, currentCount);
+		findPath(matrix, row - 2, col + 1, currentCount);
 		findPath(matrix, row + 2, col - 1, currentCount);
+		findPath(matrix, row - 2, col - 1, currentCount);
 		currentCount--;
 
 	}

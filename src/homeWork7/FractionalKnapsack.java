@@ -40,7 +40,7 @@ public class FractionalKnapsack {
 
 	}
 
-	public static void knapsack(List<Item> items, int capacity) {
+	public static double knapsack(List<Item> items, int capacity) {
 		double totalPrice = 0;
 		List<Item> knapsack = new ArrayList<>();
 		int currentCapacity = capacity;
@@ -73,7 +73,7 @@ public class FractionalKnapsack {
 		for (Item item : knapsack) {
 			totalPrice += item.getWeight();
 		}
-		System.out.println(totalPrice);
+		return totalPrice;
 	}
 
 	public static void main(String[] args) {
@@ -81,23 +81,31 @@ public class FractionalKnapsack {
 		item.add(new Item(12, 8));
 		item.add(new Item(16, 8));
 		item.add(new Item(25, 10));
+		System.out.println(knapsack(item, 16));
 
 		List<Item> item2 = new ArrayList<Item>();
 		item2.add(new Item(13, 7));
 		item2.add(new Item(15, 7));
+		System.out.println(knapsack(item2, 13));
 
 		List<Item> item3 = new ArrayList<Item>();
-		item3.add(new Item(12, 14));
-		item3.add(new Item(45, 54));
-		item3.add(new Item(98, 78));
-		item3.add(new Item(21, 51));
-		item3.add(new Item(64, 11));
-		item3.add(new Item(90, 117));
-		item3.add(new Item(33, 17));
-		item3.add(new Item(64, 23));
-		item3.add(new Item(7, 3));
-		
-		
-		knapsack(item3, 134);
+		item3.add(new Item(50, 25));
+		item3.add(new Item(34, 25));
+		item3.add(new Item(41, 25));
+		item3.add(new Item(3, 25));
+		System.out.println(knapsack(item3, 22));
+
+		List<Item> item4 = new ArrayList<Item>();
+		item4.add(new Item(12, 14));
+		item4.add(new Item(45, 54));
+		item4.add(new Item(98, 78));
+		item4.add(new Item(21, 51));
+		item4.add(new Item(64, 11));
+		item4.add(new Item(90, 117));
+		item4.add(new Item(33, 17));
+		item4.add(new Item(64, 23));
+		item4.add(new Item(7, 3));
+		System.out.println(knapsack(item4, 134));
+
 	}
 }

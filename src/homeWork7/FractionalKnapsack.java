@@ -11,24 +11,67 @@ Items will be given on separate lines in format price -> weight. Round all numbe
  */
 package homeWork7;
 
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+
 import homeWork6.Edge;
 
 public class FractionalKnapsack {
-	static class Item implements Comparable<Item> {
-		private int weight;
-		private int price;
-		private double ratio = price / weight;
+	static class Item {
+		private double weight;
+		private double price;
+		private double ratio;
 
-		@Override
-		public int compareTo(Item other) {
+		public Item(double weight, double price) {
+			this.weight = weight;
+			this.price = price;
+//			double x = 
+			this.ratio = price / weight;
+		}
 
-			return this.ratio > other.ratio ? 1 : this.ratio < other.ratio ? -1
-					: 0;
+		public double getPrice() {
+			return price;
+		}
+
+		public double getWeight() {
+			return weight;
+		}
+
+	}
+
+	public static void knapsack(List<Item> items, int capacity) {
+		List<Item> knapsack = new ArrayList<>();
+		int currentCapacity = capacity;
+		items.sort(new Comparator<Item>() {
+
+			@Override
+			public int compare(Item o1, Item o2) {
+				return o1.ratio > o2.ratio ? 1 : o1.ratio < o2.ratio ? -1 : 0;
+			}
+		});
+
+		for (Item item : items) {
+			if (item.getPrice() <= currentCapacity) {
+				knapsack.add(item);
+				currentCapacity -= item.getPrice();
+				continue;
+			} else if (currentCapacity > 0) {
+				double currentRatio = currentCapacity / item.getPrice();
+				double currentPrice = (item.getPrice() * currentRatio);
+				Item partOfItem = new Item(item.getWeight() * currentCapacity,item.getPrice()*currentRatio);
+				knapsack.add(partOfItem);
+				continue;
+			}
 		}
 	}
 
 	public static void main(String[] args) {
-		
-	}
+		List<Item> item = new ArrayList<Item>();
+		item.add(new Item(12, 8));
+		item.add(new Item(16, 8));
+		item.add(new Item(25, 10));
 
+		knapsack(item, 16);
+	}
 }

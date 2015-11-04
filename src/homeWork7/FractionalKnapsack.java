@@ -26,7 +26,7 @@ public class FractionalKnapsack {
 		public Item(double weight, double price) {
 			this.weight = weight;
 			this.price = price;
-//			double x = 
+			// double x =
 			this.ratio = price / weight;
 		}
 
@@ -41,6 +41,7 @@ public class FractionalKnapsack {
 	}
 
 	public static void knapsack(List<Item> items, int capacity) {
+		double totalPrice = 0;
 		List<Item> knapsack = new ArrayList<>();
 		int currentCapacity = capacity;
 		items.sort(new Comparator<Item>() {
@@ -58,12 +59,21 @@ public class FractionalKnapsack {
 				continue;
 			} else if (currentCapacity > 0) {
 				double currentRatio = currentCapacity / item.getPrice();
-				double currentPrice = (item.getPrice() * currentRatio);
-				Item partOfItem = new Item(item.getWeight() * currentCapacity,item.getPrice()*currentRatio);
+				double partOfPrice = (item.getPrice() * currentRatio);
+				double partOfWeight = item.getWeight() * currentRatio;
+
+				Item partOfItem = new Item(partOfWeight, partOfPrice);
 				knapsack.add(partOfItem);
+				currentCapacity -= partOfPrice;
 				continue;
+			} else {
+				// break;
 			}
 		}
+		for (Item item : knapsack) {
+			totalPrice += item.getWeight();
+		}
+		System.out.println(totalPrice);
 	}
 
 	public static void main(String[] args) {
@@ -72,6 +82,22 @@ public class FractionalKnapsack {
 		item.add(new Item(16, 8));
 		item.add(new Item(25, 10));
 
-		knapsack(item, 16);
+		List<Item> item2 = new ArrayList<Item>();
+		item2.add(new Item(13, 7));
+		item2.add(new Item(15, 7));
+
+		List<Item> item3 = new ArrayList<Item>();
+		item3.add(new Item(12, 14));
+		item3.add(new Item(45, 54));
+		item3.add(new Item(98, 78));
+		item3.add(new Item(21, 51));
+		item3.add(new Item(64, 11));
+		item3.add(new Item(90, 117));
+		item3.add(new Item(33, 17));
+		item3.add(new Item(64, 23));
+		item3.add(new Item(7, 3));
+		
+		
+		knapsack(item3, 134);
 	}
 }

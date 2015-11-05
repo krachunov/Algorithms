@@ -10,10 +10,21 @@ e.g. cell (0, 0) will be 1, the first step, the next visited cell (0, 2) will ha
 
 package homeWork7;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class KnightTour {
+
+	static private class Position {
+		int x;
+		int y;
+
+		public Position(int x, int y) {
+			this.x = x;
+			this.y = y;
+		}
+	}
 
 	public static void findPath(int[][] matrix, int row, int col, int count) {
 
@@ -29,18 +40,50 @@ public class KnightTour {
 		int currentCount = count;
 		currentCount++;
 		matrix[row][col] = currentCount;
+		
+		List<Position> position = new ArrayList<Position>();
+		position.add(new Position(1, 2));
+		position.add(new Position(1, -2));
+		position.add(new Position(2, 1));
+		position.add(new Position(2, -1));
+		position.add(new Position(-1, 2));
+		position.add(new Position(-1, -2));
+		position.add(new Position(-2, 1));
+		position.add(new Position(-2, -1));
 
-		findPath(matrix, row + 1, col + 2, currentCount);
-		findPath(matrix, row - 1, col + 2, currentCount);
-		findPath(matrix, row + 2, col + 1, currentCount);
-		findPath(matrix, row + 1, col - 2, currentCount);
-		findPath(matrix, row - 1, col - 2, currentCount);
-		findPath(matrix, row - 2, col + 1, currentCount);
-		findPath(matrix, row + 2, col - 1, currentCount);
-		findPath(matrix, row - 2, col - 1, currentCount);
-		currentCount--;
+		currentCount = 0;
 
 	}
+	
+	
+	
+	// public static void findPath(int[][] matrix, int row, int col, int count)
+	// {
+	//
+	// // check if out of array
+	// if (row < 0 || col < 0 || row >= matrix.length
+	// || col >= matrix[row].length) {
+	// return;
+	// }
+	// // check is free
+	// if (matrix[row][col] != 0) {
+	// return;
+	// }
+	// int currentCount = count;
+	// currentCount++;
+	// matrix[row][col] = currentCount;
+	//
+	// findPath(matrix, row + 1, col + 2, currentCount);
+	// findPath(matrix, row + 1, col - 2, currentCount);
+	// findPath(matrix, row + 2, col + 1, currentCount);
+	// findPath(matrix, row + 2, col - 1, currentCount);
+	// findPath(matrix, row - 1, col + 2, currentCount);
+	// findPath(matrix, row - 1, col - 2, currentCount);
+	// findPath(matrix, row - 2, col + 1, currentCount);
+	// findPath(matrix, row - 2, col - 1, currentCount);
+	// currentCount=0;
+	//
+	// }
 
 	public static void knightTour(int n) {
 		int[][] board = new int[n][n];

@@ -26,6 +26,37 @@ public class KnightTour {
 		}
 	}
 
+//	public static void findPath(int[][] matrix, int row, int col, int count) {
+//
+//		// check if out of array
+//		if (row < 0 || col < 0 || row >= matrix.length
+//				|| col >= matrix[row].length) {
+//			return;
+//		}
+//		// check is free
+//		if (matrix[row][col] != 0) {
+//			return;
+//		}
+//		int currentCount = count;
+//		currentCount++;
+//		matrix[row][col] = currentCount;
+//		
+//		List<Position> position = new ArrayList<Position>();
+//		position.add(new Position(1, 2));
+//		position.add(new Position(1, -2));
+//		position.add(new Position(2, 1));
+//		position.add(new Position(2, -1));
+//		position.add(new Position(-1, 2));
+//		position.add(new Position(-1, -2));
+//		position.add(new Position(-2, 1));
+//		position.add(new Position(-2, -1));
+//
+//		currentCount = 0;
+//
+//	}
+	
+	
+	
 	public static void findPath(int[][] matrix, int row, int col, int count) {
 
 		// check if out of array
@@ -40,54 +71,22 @@ public class KnightTour {
 		int currentCount = count;
 		currentCount++;
 		matrix[row][col] = currentCount;
-		
-		List<Position> position = new ArrayList<Position>();
-		position.add(new Position(1, 2));
-		position.add(new Position(1, -2));
-		position.add(new Position(2, 1));
-		position.add(new Position(2, -1));
-		position.add(new Position(-1, 2));
-		position.add(new Position(-1, -2));
-		position.add(new Position(-2, 1));
-		position.add(new Position(-2, -1));
 
-		currentCount = 0;
+		findPath(matrix, row + 1, col + 2, currentCount);
+		findPath(matrix, row + 1, col - 2, currentCount);
+		findPath(matrix, row + 2, col + 1, currentCount);
+		findPath(matrix, row + 2, col - 1, currentCount);
+		findPath(matrix, row - 1, col + 2, currentCount);
+		findPath(matrix, row - 1, col - 2, currentCount);
+		findPath(matrix, row - 2, col + 1, currentCount);
+		findPath(matrix, row - 2, col - 1, currentCount);
+		currentCount=0;
 
 	}
-	
-	
-	
-	// public static void findPath(int[][] matrix, int row, int col, int count)
-	// {
-	//
-	// // check if out of array
-	// if (row < 0 || col < 0 || row >= matrix.length
-	// || col >= matrix[row].length) {
-	// return;
-	// }
-	// // check is free
-	// if (matrix[row][col] != 0) {
-	// return;
-	// }
-	// int currentCount = count;
-	// currentCount++;
-	// matrix[row][col] = currentCount;
-	//
-	// findPath(matrix, row + 1, col + 2, currentCount);
-	// findPath(matrix, row + 1, col - 2, currentCount);
-	// findPath(matrix, row + 2, col + 1, currentCount);
-	// findPath(matrix, row + 2, col - 1, currentCount);
-	// findPath(matrix, row - 1, col + 2, currentCount);
-	// findPath(matrix, row - 1, col - 2, currentCount);
-	// findPath(matrix, row - 2, col + 1, currentCount);
-	// findPath(matrix, row - 2, col - 1, currentCount);
-	// currentCount=0;
-	//
-	// }
 
 	public static void knightTour(int n) {
 		int[][] board = new int[n][n];
-		findPath(board, 0, 0, 0);
+		findPath(board, 0, 3, 0);
 		for (int row = 0; row < board.length; row++) {
 			System.out.println();
 			for (int col = 0; col < board[0].length; col++) {

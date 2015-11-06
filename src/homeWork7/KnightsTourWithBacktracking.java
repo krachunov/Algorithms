@@ -1,5 +1,5 @@
 /**
- * dim4o
+ * @author dim4o
  */
 
 package homeWork7;

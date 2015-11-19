@@ -42,7 +42,7 @@ public class MostReliablePath {
 		List<Edge> edges3 = new ArrayList<>();
 		edges3.add(new Edge(0, 2, 10));
 		edges3.add(new Edge(0, 1, 12));
-//		edges3.add(new Edge(1, 2, 10));
+		// edges3.add(new Edge(1, 2, 10));
 		edges3.add(new Edge(1, 3, 3));
 		edges3.add(new Edge(2, 3, 6));
 
@@ -61,13 +61,15 @@ public class MostReliablePath {
 			if (!graph.containsKey(edge.getEndNode())) {
 				graph.put((Integer) edge.getEndNode(), new ArrayList<Edge>());
 			}
-			Edge reversedEdge = new Edge(edge.getEndNode(), edge.getStartNode(), edge.getWightl());
+			Edge reversedEdge = new Edge(edge.getEndNode(),
+					edge.getStartNode(), edge.getWightl());
 			graph.get(edge.getEndNode()).add(reversedEdge);
 		}
 
 		return graph;
 	}
 
+	// Dosn't work like dijkstra. Work like kruskal
 	private static void dijkstra(List<Edge> edges, int startingNode) {
 
 		Map<Integer, List<Edge>> graph = buildGraph(edges);
@@ -87,13 +89,13 @@ public class MostReliablePath {
 		distance[startingNode] = 0;
 
 		do {
-			//TODO
+			// TODO
 			List<Edge> childOfStartingtNode = graph.get(startingNode);
 			for (Edge edge : childOfStartingtNode) {
 				if (!edge.isConnected()) {
 
 					priorityQueue.add(edge);
-				
+
 				}
 			}
 
@@ -103,7 +105,8 @@ public class MostReliablePath {
 				visitedNode[currentEdge.getEndNode()] = true;
 				parent[currentEdge.getEndNode()] = currentEdge.getStartNode();
 
-				int newDistance = distance[currentEdge.getStartNode()]+ currentEdge.getWightl();
+				int newDistance = distance[currentEdge.getStartNode()]
+						+ currentEdge.getWightl();
 
 				if (distance[currentEdge.getEndNode()] > newDistance) {
 					distance[currentEdge.getEndNode()] = newDistance;
